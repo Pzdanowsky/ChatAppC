@@ -12,9 +12,9 @@ public class CommunicationServices {
     private static ObjectData objectDataSend;
 
 
-    public static void send(){
+    public static void send(String tag){
 
-        objectDataSend = DataSendRepository.getInstance().getObjectData("zdanek");
+        objectDataSend = DataSendRepository.getInstance().getObjectData(tag);
 
         try{
 
