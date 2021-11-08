@@ -25,7 +25,7 @@ public class ObjectData implements Serializable {
         return username;
     }
 
-    public void setSUsername(String sesionPassword) {
+    public void setUsername(String sesionPassword) {
         this.username = username;
     }
 

@@ -4,9 +4,8 @@ public class User {
     private String tag;
 
 
-    public User(String username){
-        this.username = username;
-        this.tag = "00000";
+    public User(){
+
     }
 
     public String getUsername() {
