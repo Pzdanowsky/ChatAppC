@@ -73,7 +73,7 @@ public class ObjectData implements Serializable {
     }
 
     public String getTo() {
-        return to;
+        return this.to;
     }
 
     public void setTo(String to) {

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         System.out.println("Client started");
 
         ObjectData obj = new ObjectData();
@@ -18,7 +18,9 @@ public class Main {
         Sender senderThread = new Sender();
         DataSendRepository.getInstance().setObserverSender(senderThread);
         ReciveService reciverThread = new ReciveService();
-        reciverThread.start();
+        //reciverThread.start();
+        Thread threadr = new Thread(reciverThread);
+        threadr.start();
 
 
         String temp;
@@ -37,7 +39,7 @@ public class Main {
         obj.setCommand("message");
         obj.setDataType("serwer");
         obj.setSessionNumber(User.getInstance().getSessionNumber());
-        obj.setTo("zdanek");
+        obj.setTo("bolek");
         obj.setSesionToken(User.getInstance().getSessionToken());
             temp = scan.nextLine();
          /*   if(temp == "change") {

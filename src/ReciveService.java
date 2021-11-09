@@ -21,7 +21,7 @@ public class ReciveService extends Thread{
 
 
     @Override
-    public  void run() {
+    public synchronized void run() {
         System.out.println("Thread recive run");
 
         while(true) {
