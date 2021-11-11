@@ -1,6 +1,12 @@
-import javax.imageio.IIOException;
+package Services;
+
+import Repositories.DataReciveRepository;
+import Objects.ObjectData;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import Connection.*;
+import Objects.*;
 
 public class ReciveService extends Thread{
 
@@ -9,13 +15,14 @@ public class ReciveService extends Thread{
     private static ObjectData objectDataRecive;
 
 
-    ReciveService(){
+    public ReciveService(){
         try {
             objectIn = ServerSocketConnection.getObjectIn();
         }catch(Exception e){
             System.err.println(e);
         }
         System.out.println("Thread recive done!");
+
     }
 
 
@@ -42,7 +49,7 @@ public class ReciveService extends Thread{
 
             }catch(IOException e){
                 e.printStackTrace();
-                System.out.println("Send to server ERROR in ReciveService:run()");
+                System.out.println("Send to server ERROR in Services.ReciveService:run()");
             }catch(ClassNotFoundException ex){
                 System.err.println(ex);
             }

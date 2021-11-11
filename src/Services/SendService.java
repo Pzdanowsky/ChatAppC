@@ -1,6 +1,12 @@
+package Services;
+
+import Objects.ObjectData;
+import Repositories.*;
+import Connection.*;
+
 import java.io.ObjectOutputStream;
 
-public class Sender{
+public class SendService {
 
     private static ObjectOutputStream objectOut;
 
@@ -13,7 +19,7 @@ public class Sender{
             if(objectDataSend == null){
 
             }else {
-               // System.out.println(DataSendRepository.getSendList().size());
+               // System.out.println(Repositories.DataSendRepository.getSendList().size());
                 try {
 
                     objectOut = ServerSocketConnection.getObjectOut();
@@ -24,7 +30,7 @@ public class Sender{
                     System.out.println("Wysłano");
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    System.out.println("Send to server ERROR in CommunicationServices:send()");
+                    System.out.println("Send to server ERROR in Services.CommunicationServices:send()");
                 }
             }
 

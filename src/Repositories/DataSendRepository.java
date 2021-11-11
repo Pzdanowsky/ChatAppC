@@ -1,4 +1,8 @@
-import java.util.ArrayList;
+package Repositories;
+
+import Objects.ObjectData;
+import Services.SendService;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -6,7 +10,7 @@ public class DataSendRepository {
 
     private static DataSendRepository instance;
     private static Map<String, ObjectData> sendList;
-    private static Sender observerSender;
+    private static SendService observerSendService;
 
 
     public static DataSendRepository getInstance() {
@@ -21,8 +25,8 @@ public class DataSendRepository {
         sendList = new HashMap<>();
     }
 
-    public void setObserverSender(Sender sender){
-        observerSender = sender;
+    public void setObserverSender(SendService sendService){
+        observerSendService = sendService;
     }
 
     public void addDataSend(ObjectData objectDataSend) {
@@ -37,7 +41,7 @@ public class DataSendRepository {
     }
 
     public void update(){
-        observerSender.notif();
+        observerSendService.notif();
     }
 
 

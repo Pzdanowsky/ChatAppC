@@ -1,3 +1,5 @@
+package Objects;
+
 public class User {
 
     private static User instance;

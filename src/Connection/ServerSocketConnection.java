@@ -1,3 +1,5 @@
+package Connection;
+
 import java.io.*;
 import java.net.Socket;
 
@@ -5,7 +7,7 @@ import java.net.Socket;
 public class ServerSocketConnection {
 
 /**
- * Klasa ServerSocketConnection nazwiązuje połączenie z serverem po stronie klienta
+ * Klasa Connection.ServerSocketConnection nazwiązuje połączenie z serverem po stronie klienta
  */
 
     private static ServerSocketConnection instance;

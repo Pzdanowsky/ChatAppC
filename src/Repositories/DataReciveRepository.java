@@ -1,10 +1,14 @@
+package Repositories;
+
+import Objects.ObjectData;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class DataReciveRepository {
 
     private static DataReciveRepository instance;
-    private static Map<String,ObjectData> reciveList;
+    private static Map<String, ObjectData> reciveList;
 
 
 

@@ -1,6 +1,11 @@
-import java.net.*;
-import java.io.*;
+package Services;
 
+import Repositories.DataReciveRepository;
+import Repositories.DataSendRepository;
+import Objects.ObjectData;
+
+import java.io.*;
+import Connection.*;
 
 public class CommunicationServices {
 
@@ -23,7 +28,7 @@ public class CommunicationServices {
 
         }catch(Exception ex){
             ex.printStackTrace();
-            System.out.println("Send to server ERROR in CommunicationServices:send()");
+            System.out.println("Send to server ERROR in Services.CommunicationServices:send()");
         }
 
     }
@@ -37,7 +42,7 @@ public class CommunicationServices {
 
         }catch(Exception ex){
             ex.printStackTrace();
-            System.out.println("Send to server ERROR in CommunicationServices:send()");
+            System.out.println("Send to server ERROR in Services.CommunicationServices:send()");
         }
 
     }

@@ -1,6 +1,12 @@
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
+import Connection.ServerSocketConnection;
+import Objects.User;
+import Repositories.DataSendRepository;
+import Objects.ObjectData;
+import Services.ReciveService;
+import Services.SendService;
+
+import java.io.File;
+import java.nio.channels.FileChannel;
 import java.util.Scanner;
 
 public class Main {
@@ -15,14 +21,13 @@ public class Main {
 
         Scanner scan = new Scanner(System.in);
         ServerSocketConnection.getInstance();
-        Sender senderThread = new Sender();
-        DataSendRepository.getInstance().setObserverSender(senderThread);
+        SendService sendServiceThread = new SendService();
+        DataSendRepository.getInstance().setObserverSender(sendServiceThread);
         ReciveService reciverThread = new ReciveService();
         //reciverThread.start();
         Thread threadr = new Thread(reciverThread);
         threadr.start();
-
-
+        
         String temp;
         obj.setCommand("message");
         System.out.println("Twoja nazwa");
@@ -49,9 +54,9 @@ public class Main {
 */
             obj.setData(temp);
             DataSendRepository.getInstance().addDataSend(obj);
-            //CommunicationServices.send("serwer");
-            //CommunicationServices.recive();
-           //System.out.println(DataReciveRepository.getInstance().getObjectData("serwer").getData());
+            //Services.CommunicationServices.send("serwer");
+            //Services.CommunicationServices.recive();
+           //System.out.println(Repositories.DataReciveRepository.getInstance().getObjectData("serwer").getData());
         }
 
 
