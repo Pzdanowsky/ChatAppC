@@ -19,9 +19,8 @@ public class SendService {
             if(objectDataSend == null){
 
             }else {
-               // System.out.println(Repositories.DataSendRepository.getSendList().size());
-                try {
 
+                try {
                     objectOut = ServerSocketConnection.getObjectOut();
                     objectOut.writeObject(objectDataSend);
                     objectOut.reset();
@@ -38,7 +37,7 @@ public class SendService {
     }
 
 
-    public void notif(){
+    public void notice(){
         send();
     }
 }

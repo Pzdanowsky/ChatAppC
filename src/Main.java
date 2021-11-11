@@ -1,66 +1,71 @@
 import Connection.ServerSocketConnection;
+import Objects.FileObject;
+import Objects.MessageObject;
 import Objects.User;
 import Repositories.DataSendRepository;
 import Objects.ObjectData;
+import Services.FileCreatorService;
 import Services.ReciveService;
 import Services.SendService;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
+//import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+public class Main extends Application {
+
+    public static void main(String[] args) throws InterruptedException, IOException {
         System.out.println("Client started");
-
         ObjectData obj = new ObjectData();
         User.getInstance();
         obj.setSessionNumber(User.getInstance().getSessionNumber());
         obj.setSesionToken(User.getInstance().getSessionToken());
 
-        Scanner scan = new Scanner(System.in);
-        ServerSocketConnection.getInstance();
+
+       //  ServerSocketConnection.getInstance();
         SendService sendServiceThread = new SendService();
         DataSendRepository.getInstance().setObserverSender(sendServiceThread);
         ReciveService reciverThread = new ReciveService();
         //reciverThread.start();
         Thread threadr = new Thread(reciverThread);
         threadr.start();
-        
-        String temp;
-        obj.setCommand("message");
-        System.out.println("Twoja nazwa");
-        temp = scan.nextLine();
-        User.getInstance().setUsername(temp);
-        obj.setUsername(temp);
-        obj.setFrom(temp);
-        obj.setTo("zdanek");
-        DataSendRepository.getInstance().addDataSend(obj);
-        System.out.println(obj.getUsername());
 
-        while(true){
+       // System.out.println(obj.getUsername());
 
-        obj.setCommand("message");
-        obj.setDataType("serwer");
-        obj.setSessionNumber(User.getInstance().getSessionNumber());
-        obj.setTo("bolek");
-        obj.setSesionToken(User.getInstance().getSessionToken());
-            temp = scan.nextLine();
-         /*   if(temp == "change") {
-                temp = scan.nextLine();
-                obj.setTo(temp);
-            }
-*/
-            obj.setData(temp);
-            DataSendRepository.getInstance().addDataSend(obj);
-            //Services.CommunicationServices.send("serwer");
-            //Services.CommunicationServices.recive();
-           //System.out.println(Repositories.DataReciveRepository.getInstance().getObjectData("serwer").getData());
+
+        File send = new File("src/fileRepository/send/zdj.jpg");
+        if(send.exists()){
+            System.out.println("Mam plik");
+            FileObject fileObject = FileCreatorService.preparationFileObject(send);
+            //FileCreatorService.preparationFile(fileObject);
+            //Desktop.getDesktop().open(FileCreatorService.preparationFile(fileObject));
+            obj.setFileObject(fileObject);
+        }else{
+            System.out.println("Nie mam pliku");
         }
 
 
+        obj.setUsername("zdanek");
+        obj.setMessageObject(new MessageObject("zdanek", "zdanek", "wiadomość"));
+        obj.setSessionNumber(User.getInstance().getSessionNumber());
+        obj.setCommand("file");
+        obj.setSesionToken(User.getInstance().getSessionToken());
 
 
+       // DataSendRepository.getInstance().addDataSend(obj);
+
+            launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        stage.show();
     }
 }
