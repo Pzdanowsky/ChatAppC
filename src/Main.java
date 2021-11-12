@@ -1,4 +1,5 @@
 import Connection.ServerSocketConnection;
+import Controllers.MainController;
 import Objects.FileObject;
 import Objects.MessageObject;
 import Objects.User;
@@ -8,7 +9,11 @@ import Services.FileCreatorService;
 import Services.ReciveService;
 import Services.SendService;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 //import java.awt.*;
 import java.io.File;
@@ -23,49 +28,21 @@ public class Main extends Application {
 
     public static void main(String[] args) throws InterruptedException, IOException {
         System.out.println("Client started");
-        ObjectData obj = new ObjectData();
-        User.getInstance();
-        obj.setSessionNumber(User.getInstance().getSessionNumber());
-        obj.setSesionToken(User.getInstance().getSessionToken());
-
-
-       //  ServerSocketConnection.getInstance();
-        SendService sendServiceThread = new SendService();
-        DataSendRepository.getInstance().setObserverSender(sendServiceThread);
-        ReciveService reciverThread = new ReciveService();
-        //reciverThread.start();
-        Thread threadr = new Thread(reciverThread);
-        threadr.start();
-
-       // System.out.println(obj.getUsername());
-
-
-        File send = new File("src/fileRepository/send/zdj.jpg");
-        if(send.exists()){
-            System.out.println("Mam plik");
-            FileObject fileObject = FileCreatorService.preparationFileObject(send);
-            //FileCreatorService.preparationFile(fileObject);
-            //Desktop.getDesktop().open(FileCreatorService.preparationFile(fileObject));
-            obj.setFileObject(fileObject);
-        }else{
-            System.out.println("Nie mam pliku");
-        }
-
-
-        obj.setUsername("zdanek");
-        obj.setMessageObject(new MessageObject("zdanek", "zdanek", "wiadomość"));
-        obj.setSessionNumber(User.getInstance().getSessionNumber());
-        obj.setCommand("file");
-        obj.setSesionToken(User.getInstance().getSessionToken());
-
-
-       // DataSendRepository.getInstance().addDataSend(obj);
-
             launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/mainFXML.fxml"));
+        StackPane paneStack = loader.load();
+
+        Scene scena = new Scene(paneStack,800,500);
+
+        stage.setScene(scena);
+        stage.setTitle("ChatApp - Czatuj z byczkiem");
         stage.show();
+        MainController.getInstance().setStage(stage);
+        //MainController.getInstance().setStackPane(paneStack);
+        //Stage.initStyle(StageStyle.UNDECORATED);
     }
 }
