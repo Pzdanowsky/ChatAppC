@@ -3,12 +3,10 @@ package Controllers;
 import Connection.ServerSocketConnection;
 import Objects.ObjectData;
 import Objects.User;
+import Repositories.DataReciveRepository;
 import Repositories.DataSendRepository;
 import Repositories.LoginPropertyManager;
-import Services.PreparationObjectsService;
-import Services.ReciveService;
-import Services.SendService;
-import Services.ThreadsMenager;
+import Services.*;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -48,12 +46,15 @@ public class LoginController {
         passwordField.textProperty().bindBidirectional(man.passwordProperty());
         label.textProperty().bind(man.loginProperty());
         loginButton.disableProperty().bind(man.loginBooleanProperty());
+
         ServerSocketConnection.getInstance();
 
         SendService sendServiceThread = new SendService();
         DataSendRepository.getInstance().setObserverSender(sendServiceThread);
         ReciveService reciverThread = new ReciveService();
         ThreadsMenager.getInstance().startRecive(reciverThread);
+        CommandManager commandManager = new CommandManager();
+        DataReciveRepository.setObserverCommandManager(commandManager);
 
         //MainController.getInstance().getMainControl().
 

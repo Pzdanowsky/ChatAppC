@@ -10,6 +10,7 @@ public class ObjectData implements Serializable {
     private String sesionToken ; // Session password
     private String username; // Login`
     private boolean authenticated;
+    private int userID;
     private String password;
     private String command; // Logowanie, Wysłanie wiadomosci, Wysyłanie pliku
     private String dataType; //MESSAGE, FILE
@@ -90,5 +91,13 @@ public class ObjectData implements Serializable {
 
     public void setAuthenticated(boolean authenticated) {
         this.authenticated = authenticated;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }

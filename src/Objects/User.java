@@ -4,6 +4,7 @@ public class User {
 
     private static User instance;
 
+    private int userID;
     private String username;
     private String sessionNumber;
     private String sessionToken;
@@ -77,5 +78,13 @@ public class User {
 
     public void setAuthenticated(boolean authenticated) {
         this.authenticated = authenticated;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 }

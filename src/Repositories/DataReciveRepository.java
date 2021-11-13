@@ -1,6 +1,7 @@
 package Repositories;
 
 import Objects.ObjectData;
+import Services.CommandManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +10,7 @@ public class DataReciveRepository {
 
     private static DataReciveRepository instance;
     private static Map<String, ObjectData> reciveList;
-
+    private static CommandManager observerCommandManager;
 
 
     public static DataReciveRepository getInstance(){
@@ -20,15 +21,25 @@ public class DataReciveRepository {
         return instance;
     }
 
+
     private DataReciveRepository(){
         reciveList = new HashMap<>();
     }
 
+
+    public static void setObserverCommandManager(CommandManager observerCommandManager) {
+        DataReciveRepository.observerCommandManager = observerCommandManager;
+    }
+
     public void addDataRecive(ObjectData objectDataRecive){
         reciveList.put(objectDataRecive.getDataType(),objectDataRecive);
-        /* if(objectDataRecive.getDataType.equals("login"){
+        update();
+    }
 
-         */
+
+
+    public void update(){
+        observerCommandManager.manage();
     }
 
     public ObjectData getObjectData(String dataType){
@@ -40,6 +51,18 @@ public class DataReciveRepository {
         return null;
     }
 
+    public ObjectData iterList(){
+        if(!reciveList.isEmpty()) {
+            for (Map.Entry<String, ObjectData> entry : reciveList.entrySet()) {
+                ObjectData objectData = entry.getValue();
+                reciveList.remove(entry.getKey());
+                return objectData;
+
+
+            }
+        }
+        return null;
+    }
 
 
 }

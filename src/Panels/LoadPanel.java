@@ -1,4 +1,4 @@
-package Services;
+package Panels;
 
 import Controllers.MainController;
 import javafx.scene.layout.Pane;

@@ -38,18 +38,7 @@ public class ReciveService extends Thread{
             try {
                 objectDataRecive = (ObjectData) objectIn.readObject();
                 if(objectDataRecive != null) {
-                    if(objectDataRecive.getCommand().equals("message")) {
-                        System.out.println("Odebrano: " + objectDataRecive.getMessageObject().getData());
-                    }
-                    if(objectDataRecive.getCommand().equals("file")){
-                       File fl = FileCreatorService.preparationFile(objectDataRecive.getFileObject());
-                        //Desktop.getDesktop().open(fl);
-                    }
-
-                    if(User.getInstance().checkEqualsToken("00000")){
-                        User.getInstance().setSessionToken(objectDataRecive.getSesionToken());
                         User.getInstance().setSessionNumber(objectDataRecive.getSessionNumber());
-                    }
 
                        DataReciveRepository.getInstance().addDataRecive(objectDataRecive);
 
