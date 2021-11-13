@@ -1,13 +1,15 @@
 package Controllers;
 
 import Connection.ServerSocketConnection;
+import Managers.CommandManager;
+import Managers.ThreadsMenager;
 import Objects.ObjectData;
 import Objects.User;
+import Panels.RegisterPanel;
 import Repositories.DataReciveRepository;
 import Repositories.DataSendRepository;
-import Repositories.LoginPropertyManager;
+import Managers.LoginPropertyManager;
 import Services.*;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -35,7 +37,7 @@ public class LoginController {
     private Label label;
 
 
-     LoginPropertyManager man = new LoginPropertyManager();
+     private LoginPropertyManager man = new LoginPropertyManager();
 
 
 
@@ -68,5 +70,7 @@ public class LoginController {
 
     public void registerAction(ActionEvent actionEvent) {
         System.out.println("Nauuura rejestracja");
+        new RegisterPanel().load();
     }
+
 }

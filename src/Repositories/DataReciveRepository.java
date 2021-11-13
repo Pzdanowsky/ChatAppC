@@ -1,7 +1,7 @@
 package Repositories;
 
 import Objects.ObjectData;
-import Services.CommandManager;
+import Managers.CommandManager;
 
 import java.util.HashMap;
 import java.util.Map;

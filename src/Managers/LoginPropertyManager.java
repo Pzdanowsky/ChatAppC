@@ -1,4 +1,4 @@
-package Repositories;
+package Managers;
 
 import javafx.beans.property.*;
 

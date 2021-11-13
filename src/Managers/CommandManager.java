@@ -1,9 +1,12 @@
-package Services;
+package Managers;
 
 import Objects.ObjectData;
 import Objects.User;
 import Repositories.DataReciveRepository;
 import Repositories.DataSendRepository;
+import Services.LoginService;
+import Services.RegisterService;
+import Services.ResponseStrategy;
 
 public class CommandManager {
 
@@ -25,7 +28,7 @@ public class CommandManager {
                     break;
 
                 case "00010":
-                    //Rejestracja
+                    strategy = new RegisterService();
                     break;
 
                 case "00011":

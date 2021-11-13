@@ -1,4 +1,6 @@
-package Services;
+package Managers;
+
+import Services.ReciveService;
 
 public class ThreadsMenager {
 

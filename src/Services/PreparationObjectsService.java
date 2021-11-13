@@ -20,4 +20,19 @@ public class PreparationObjectsService {
         return objectData;
     }
 
+    public static ObjectData preparationRegisterObject(){
+        objectData = new ObjectData();
+        objectData.setSessionNumber(User.getInstance().getSessionNumber());
+        objectData.setSesionToken(User.getInstance().getSessionToken());
+        objectData.setUsername(User.getInstance().getUsername());
+        objectData.setNameUser(User.getInstance().getName());
+        objectData.setSurnameUser(User.getInstance().getSurname());
+        objectData.setPassword(User.getInstance().getPassword());
+        objectData.setEmailUser(User.getInstance().getEmail());
+        objectData.setCommand("00010");
+        objectData.setDataType("RegisterData-Request");
+        objectData.setAuthenticated(User.getInstance().isAuthenticated());
+        return objectData;
+    }
+
 }
