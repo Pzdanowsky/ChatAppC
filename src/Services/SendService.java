@@ -19,26 +19,30 @@ public class SendService {
             if(objectDataSend == null){
 
             }else {
-               // System.out.println(Repositories.DataSendRepository.getSendList().size());
-                try {
 
+                try {
                     objectOut = ServerSocketConnection.getObjectOut();
-                    objectOut.writeObject(objectDataSend);
-                    objectOut.reset();
-                    //System.out.println(objectDataSend.getData());
-                    objectDataSend = null;
-                    System.out.println("Wysłano");
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    System.out.println("Send to server ERROR in Services.CommunicationServices:send()");
-                }
+                    if (objectOut == null) {
+                        System.out.println("Brak połaczenia z serwerem");
+                    } else {
+                        objectOut.writeObject(objectDataSend);
+                        objectOut.reset();
+                        //System.out.println(objectDataSend.getData());
+                        objectDataSend = null;
+                        System.out.println("Wysłano");
+                    }
+                    } catch(Exception ex){
+                        ex.printStackTrace();
+                        System.out.println("Send to server ERROR in Services.CommunicationServices:send()");
+                    }
+
             }
 
 
     }
 
 
-    public void notif(){
+    public void notice(){
         send();
     }
 }

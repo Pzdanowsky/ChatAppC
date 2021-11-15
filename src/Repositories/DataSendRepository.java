@@ -41,7 +41,7 @@ public class DataSendRepository {
     }
 
     public void update(){
-        observerSendService.notif();
+        observerSendService.notice();
     }
 
 

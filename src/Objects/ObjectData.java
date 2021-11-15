@@ -1,5 +1,6 @@
 package Objects;
 
+import java.io.File;
 import java.io.Serializable;
 
 public class ObjectData implements Serializable {
@@ -7,12 +8,17 @@ public class ObjectData implements Serializable {
     public static final long serialVersionUID = 1L;
     private String sessionNumber; // Uni session number
     private String sesionToken ; // Session password
-    private String username; // Login
+    private String username; // Login`
+    private boolean authenticated;
+    private int userID;
+    private String password;
+    private String nameUser;
+    private String surnameUser;
+    private String emailUser;
     private String command; // Logowanie, Wysłanie wiadomosci, Wysyłanie pliku
-    private String from; //FROM USER
-    private String to; // TO USER OR TO SERWER
     private String dataType; //MESSAGE, FILE
-    private String data; // DATA example: password, message text,
+    private MessageObject messageObject;
+    private FileObject fileObject;
 
 
     public ObjectData() {
@@ -50,14 +56,6 @@ public class ObjectData implements Serializable {
         this.dataType = dataType;
     }
 
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
     public String getSesionToken() {
         return sesionToken;
     }
@@ -66,19 +64,67 @@ public class ObjectData implements Serializable {
         this.sesionToken = sesionToken;
     }
 
-    public String getFrom() {
-        return from;
+    public MessageObject getMessageObject() {
+        return messageObject;
     }
 
-    public void setFrom(String from) {
-        this.from = from;
+    public void setMessageObject(MessageObject messageObject) {
+        this.messageObject = messageObject;
     }
 
-    public String getTo() {
-        return this.to;
+    public FileObject getFileObject() {
+        return fileObject;
     }
 
-    public void setTo(String to) {
-        this.to = to;
+    public void setFileObject(FileObject fileObject) {
+        this.fileObject = fileObject;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isAuthenticated() {
+        return authenticated;
+    }
+
+    public void setAuthenticated(boolean authenticated) {
+        this.authenticated = authenticated;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public String getNameUser() {
+        return nameUser;
+    }
+
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
+    }
+
+    public String getSurnameUser() {
+        return surnameUser;
+    }
+
+    public void setSurnameUser(String surnameUser) {
+        this.surnameUser = surnameUser;
+    }
+
+    public String getEmailUser() {
+        return emailUser;
+    }
+
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
     }
 }

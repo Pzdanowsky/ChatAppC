@@ -4,9 +4,16 @@ public class User {
 
     private static User instance;
 
+    private int userID;
     private String username;
     private String sessionNumber;
     private String sessionToken;
+    private String password;
+    private boolean authenticated;
+    private String name;
+    private String surname;
+    private String email;
+
 
 
     public static User getInstance(){
@@ -19,6 +26,7 @@ public class User {
     public User(){
     this.sessionNumber = "00000";
     this.sessionToken = "0000000000";
+    this.authenticated = false;
     }
 
     public String getUsername() {
@@ -57,5 +65,53 @@ public class User {
             return true;
         }
         return false;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public boolean isAuthenticated() {
+        return authenticated;
+    }
+
+    public void setAuthenticated(boolean authenticated) {
+        this.authenticated = authenticated;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

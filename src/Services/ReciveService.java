@@ -3,6 +3,8 @@ package Services;
 import Repositories.DataReciveRepository;
 import Objects.ObjectData;
 
+//import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import Connection.*;
@@ -36,12 +38,7 @@ public class ReciveService extends Thread{
             try {
                 objectDataRecive = (ObjectData) objectIn.readObject();
                 if(objectDataRecive != null) {
-                    System.out.println(objectDataRecive.getData());
-
-                    if(User.getInstance().checkEqualsToken("00000")){
-                        User.getInstance().setSessionToken(objectDataRecive.getSesionToken());
                         User.getInstance().setSessionNumber(objectDataRecive.getSessionNumber());
-                    }
 
                        DataReciveRepository.getInstance().addDataRecive(objectDataRecive);
 
@@ -50,6 +47,7 @@ public class ReciveService extends Thread{
             }catch(IOException e){
                 e.printStackTrace();
                 System.out.println("Send to server ERROR in Services.ReciveService:run()");
+                break;
             }catch(ClassNotFoundException ex){
                 System.err.println(ex);
             }
@@ -57,16 +55,4 @@ public class ReciveService extends Thread{
         }
     }
 
-
-    public boolean checkUserData(ObjectData objectDataRecive){
-        if(User.getInstance().checkEqualsToken("00000")){
-            User.getInstance().setSessionToken(objectDataRecive.getSesionToken());
-            User.getInstance().setSessionNumber(objectDataRecive.getSessionNumber());
-            return true;
-        }else if(User.getInstance().checkEqualsToken(objectDataRecive.getSesionToken())){
-            System.out.println("Dobry token");
-            return true;
-        }
-       return false;
-    }
 }

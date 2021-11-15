@@ -1,66 +1,48 @@
 import Connection.ServerSocketConnection;
+import Controllers.MainController;
+import Objects.FileObject;
+import Objects.MessageObject;
 import Objects.User;
 import Repositories.DataSendRepository;
 import Objects.ObjectData;
+import Services.FileCreatorService;
 import Services.ReciveService;
 import Services.SendService;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+//import java.awt.*;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
-public class Main {
 
-    public static void main(String[] args) throws InterruptedException {
+public class Main extends Application {
+
+    public static void main(String[] args) throws InterruptedException, IOException {
         System.out.println("Client started");
+            launch(args);
+    }
 
-        ObjectData obj = new ObjectData();
-        User.getInstance();
-        obj.setSessionNumber(User.getInstance().getSessionNumber());
-        obj.setSesionToken(User.getInstance().getSessionToken());
+    @Override
+    public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/mainFXML.fxml"));
+        StackPane paneStack = loader.load();
 
-        Scanner scan = new Scanner(System.in);
-        ServerSocketConnection.getInstance();
-        SendService sendServiceThread = new SendService();
-        DataSendRepository.getInstance().setObserverSender(sendServiceThread);
-        ReciveService reciverThread = new ReciveService();
-        //reciverThread.start();
-        Thread threadr = new Thread(reciverThread);
-        threadr.start();
-        
-        String temp;
-        obj.setCommand("message");
-        System.out.println("Twoja nazwa");
-        temp = scan.nextLine();
-        User.getInstance().setUsername(temp);
-        obj.setUsername(temp);
-        obj.setFrom(temp);
-        obj.setTo("zdanek");
-        DataSendRepository.getInstance().addDataSend(obj);
-        System.out.println(obj.getUsername());
+        Scene scena = new Scene(paneStack,800,500);
 
-        while(true){
-
-        obj.setCommand("message");
-        obj.setDataType("serwer");
-        obj.setSessionNumber(User.getInstance().getSessionNumber());
-        obj.setTo("bolek");
-        obj.setSesionToken(User.getInstance().getSessionToken());
-            temp = scan.nextLine();
-         /*   if(temp == "change") {
-                temp = scan.nextLine();
-                obj.setTo(temp);
-            }
-*/
-            obj.setData(temp);
-            DataSendRepository.getInstance().addDataSend(obj);
-            //Services.CommunicationServices.send("serwer");
-            //Services.CommunicationServices.recive();
-           //System.out.println(Repositories.DataReciveRepository.getInstance().getObjectData("serwer").getData());
-        }
-
-
-
-
+        stage.setScene(scena);
+        stage.setTitle("ChatApp - Czatuj z byczkiem");
+        stage.show();
+        MainController.getInstance().setStage(stage);
+        //MainController.getInstance().setStackPane(paneStack);
+        //Stage.initStyle(StageStyle.UNDECORATED);
     }
 }

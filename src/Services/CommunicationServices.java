@@ -20,7 +20,7 @@ public class CommunicationServices {
     public static void send(){
 
         objectDataSend = DataSendRepository.getInstance().getObjectData("zdanek");
-        System.out.println(objectDataSend.getData());
+       // System.out.println(objectDataSend.getData());
         try{
 
         objectOut = ServerSocketConnection.getObjectOut();

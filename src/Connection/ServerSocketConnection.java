@@ -40,6 +40,17 @@ public class ServerSocketConnection {
         return client;
     }
 
+    public void closeConnection(){
+        try {
+            objectOut.close();
+            objectIn.close();
+            client.close();
+        }catch(IOException ex){
+            ex.printStackTrace();
+            System.out.println("Błąd zamknięcia połaczenia");
+        }
+    }
+
     public static ObjectOutputStream getObjectOut() {
         return objectOut;
     }
