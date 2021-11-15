@@ -32,7 +32,7 @@ public class ReciveService extends Thread{
     @Override
     public synchronized void run() {
         System.out.println("Thread recive run");
-
+        System.out.println(Thread.currentThread());
         while(true) {
 
             try {
@@ -51,6 +51,8 @@ public class ReciveService extends Thread{
             }catch(ClassNotFoundException ex){
                 System.err.println(ex);
             }
+
+
 
         }
     }
