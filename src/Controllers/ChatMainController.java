@@ -1,10 +1,13 @@
 package Controllers;
 
+import Managers.ChatMainPropertyManager;
 import Objects.User;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,18 +29,32 @@ public class ChatMainController {
     @FXML
     private VBox vb_message;
 
+    @FXML
+    public TextField messageField;
+
+    @FXML
+    private Button messageBTN;
+
+
+    private ChatMainPropertyManager pm = new ChatMainPropertyManager();
+
 
     @FXML
     public void initialize(){
-       for(int i=0; i <100; i++) {
-           addMsg();
-       }
-       scrollPane.isPannable();
+        messageField.textProperty().bindBidirectional(pm.messageTxtProperty());
+       // System.out.println("Thread chatu"+Thread.currentThread());
+    }
+
+
+    @FXML
+    public void sendMessage(){
+      System.out.println(pm.getMessageTxt());
+      addMsg(pm.getMessageTxt());
     }
 
 
 
-    public void addMsg(){
+    public void addMsg(String message){
         HBox hb = new HBox();
         hb.setAlignment(Pos.CENTER_RIGHT);
         hb.setPadding(new Insets(5,5,5,10));
@@ -48,7 +65,7 @@ public class ChatMainController {
         iw.setFitHeight(50);
 
 
-        Text text = new Text("Siemano tu serwer");
+        Text text = new Text(message);
         TextFlow textFlow = new TextFlow(text);
         textFlow.setPadding(new Insets(5,10,5,10));
         textFlow.setStyle("-fx-background-color: rgb(15,135,245)");

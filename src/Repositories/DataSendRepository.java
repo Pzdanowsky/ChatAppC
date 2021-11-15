@@ -29,9 +29,15 @@ public class DataSendRepository {
         observerSendService = sendService;
     }
 
-    public void addDataSend(ObjectData objectDataSend) {
+    public boolean addDataSend(ObjectData objectDataSend) {
         sendList.put(objectDataSend.getDataType(), objectDataSend);
-        update();
+        if(sendList.get(objectDataSend.getDataType())!= null){
+            update();
+            return true;
+        }
+        return false;
+
+
     }
 
     public ObjectData getObjectData(String dataType) {

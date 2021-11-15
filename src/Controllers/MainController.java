@@ -16,6 +16,7 @@ public class MainController {
 
     private Stage primaryStage;
 
+
     public static MainController getInstance(){
         if(instance == null){
             instance = new MainController();

@@ -5,16 +5,21 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
+<Pane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.LoginController">
    <children>
-      <TextField fx:id="loginField" layoutX="226.0" layoutY="123.0" />
-      <Label layoutX="148.0" layoutY="127.0" prefHeight="17.0" prefWidth="50.0" text="Login" />
-      <Label layoutX="148.0" layoutY="179.0" text="Hasło" />
-      <Button fx:id="loginButton" layoutX="274.0" layoutY="230.0" mnemonicParsing="false" onAction="#loginAction" text="Zaloguj" />
-      <Button fx:id="registerButton" layoutX="266.0" layoutY="284.0" mnemonicParsing="false" onAction="#registerAction" text="Zarejestruj" />
-      <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="175.0" />
-      <Label fx:id="label" layoutX="416.0" layoutY="127.0" prefHeight="17.0" prefWidth="18.0" text="aj" />
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <TextField fx:id="loginField" layoutX="226.0" layoutY="123.0" />
+            <Label layoutX="148.0" layoutY="127.0" prefHeight="17.0" prefWidth="50.0" text="Login" />
+            <Label layoutX="148.0" layoutY="179.0" text="Hasło" />
+            <Button fx:id="loginButton" layoutX="274.0" layoutY="230.0" mnemonicParsing="false" onAction="#loginAction" text="Zaloguj" />
+            <Button fx:id="registerButton" layoutX="266.0" layoutY="284.0" mnemonicParsing="false" onAction="#registerAction" text="Zarejestruj" />
+            <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="175.0" />
+            <Label fx:id="label" layoutX="416.0" layoutY="127.0" prefHeight="17.0" prefWidth="18.0" text="aj" />
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</Pane>
