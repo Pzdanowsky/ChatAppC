@@ -38,7 +38,7 @@ public class ReciveService extends Thread{
             try {
                 objectDataRecive = (ObjectData) objectIn.readObject();
                 if(objectDataRecive != null) {
-                        User.getInstance().setSessionNumber(objectDataRecive.getSessionNumber());
+                        User.getInstance().setSessionNumber(objectDataRecive.getUserData().getSessionNumber());
 
                        DataReciveRepository.getInstance().addDataRecive(objectDataRecive);
 

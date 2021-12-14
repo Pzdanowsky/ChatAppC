@@ -22,10 +22,10 @@ public class LoginService implements ResponseStrategy{
 
         if(objectDataRecive.isAuthenticated()) {
             User.getInstance().setAuthenticated(objectDataRecive.isAuthenticated());
-            User.getInstance().setUsername(objectDataRecive.getUsername());
-            User.getInstance().setSessionNumber(objectDataRecive.getSessionNumber());
-            User.getInstance().setSessionToken(objectDataRecive.getSesionToken());
-            User.getInstance().setUserID(objectDataRecive.getUserID());
+            User.getInstance().setUsername(objectDataRecive.getUserData().getUsername());
+            User.getInstance().setSessionNumber(objectDataRecive.getUserData().getSessionNumber());
+            User.getInstance().setSessionToken(objectDataRecive.getUserData().getSessionToken());
+            User.getInstance().setUserID(objectDataRecive.getUserData().getUserID());
             System.out.println(User.getInstance().getUserID());
 
 
@@ -40,7 +40,7 @@ public class LoginService implements ResponseStrategy{
             });
 
         }else{
-            User.getInstance().setSessionNumber(objectDataRecive.getSessionNumber());
+            User.getInstance().setSessionNumber(objectDataRecive.getUserData().getSessionNumber());
             System.out.println("Nie tym razem mordo");
         }
 

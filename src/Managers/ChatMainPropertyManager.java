@@ -7,6 +7,20 @@ public class ChatMainPropertyManager {
 
     private StringProperty messageTxt = new SimpleStringProperty();
 
+    private StringProperty searchText = new SimpleStringProperty();
+
+
+    public String getSearchText() {
+        return searchText.get();
+    }
+
+    public StringProperty searchTextProperty() {
+        return searchText;
+    }
+
+    public void setSearchText(String searchText) {
+        this.searchText.set(searchText);
+    }
 
     public String getMessageTxt() {
         return messageTxt.get();

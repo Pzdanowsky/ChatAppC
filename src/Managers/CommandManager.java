@@ -1,12 +1,11 @@
 package Managers;
 
 import Objects.ObjectData;
-import Objects.User;
 import Repositories.DataReciveRepository;
-import Repositories.DataSendRepository;
 import Services.LoginService;
 import Services.RegisterService;
 import Services.ResponseStrategy;
+import Services.SearchUserService;
 
 public class CommandManager {
 
@@ -44,7 +43,7 @@ public class CommandManager {
                     break;
 
                 case "00110":
-                    // Wysyłanie wiadomości
+                     strategy = new SearchUserService();
                     break;
 
                 case "00111":

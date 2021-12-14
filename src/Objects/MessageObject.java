@@ -7,7 +7,7 @@ public class MessageObject implements Serializable {
     private int id;
     private int idChatRoom;
     private String fromMessage;
-    private String toMessage;
+   private String toMessage;
     private String data;
 
     public MessageObject(){
