@@ -2,10 +2,7 @@ package Managers;
 
 import Objects.ObjectData;
 import Repositories.DataReciveRepository;
-import Services.LoginService;
-import Services.RegisterService;
-import Services.ResponseStrategy;
-import Services.SearchUserService;
+import Services.*;
 
 public class CommandManager {
 
@@ -51,11 +48,11 @@ public class CommandManager {
                     break;
 
                 case "01000":
-                    // Tworzenie chatu
+                    strategy = new CreateChatService();
                     break;
 
                 case "01001":
-                    //Pobranie wiadomości dla czatu
+                   // strategy = new AddChatRoom();
                     break;
 
                 case "01010":

@@ -1,8 +1,10 @@
 package Controllers;
 
+import Managers.ChatBoxManager;
 import Managers.ChatMainPropertyManager;
 import Managers.ThreadsMenager;
 import Managers.VboxManager;
+import Objects.MessageObject;
 import Objects.User;
 import Repositories.DataSendRepository;
 import Services.PreparationObjectsService;
@@ -30,6 +32,7 @@ public class ChatMainController {
     @FXML
     private ScrollPane scrollPane;
 
+
     @FXML
     private VBox vb_message;
 
@@ -55,15 +58,18 @@ public class ChatMainController {
 
     @FXML
     public void initialize(){
+        scrollPane.vvalueProperty().bind(vb_message.heightProperty());
         messageField.textProperty().bindBidirectional(pm.messageTxtProperty());
         tf_search.textProperty().bindBidirectional(pm.searchTextProperty());
        // System.out.println("Thread chatu"+Thread.currentThread());
         VboxManager.getInstance().setVb_search(vb_search);
+        VboxManager.getInstance().setVb_contants(vb_contacts);
+        ChatBoxManager.getInstance().setVb_messages(vb_message);
     }
 
     @FXML
     public void onSearchUser(){
-        System.out.println(pm.getSearchText());
+        //System.out.println(pm.getSearchText());
         DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationSearchUserObject(pm.getSearchText()));
 
     }
@@ -72,8 +78,10 @@ public class ChatMainController {
 
     @FXML
     public void sendMessage(){
-      System.out.println(pm.getMessageTxt());
-      addMsg(pm.getMessageTxt());
+     // System.out.println(pm.getMessageTxt());
+        MessageObject msgSend = new MessageObject(User.getInstance().getUsername(),pm.getMessageTxt());
+      ChatBoxManager.getInstance().getActiveChat().addMessage(msgSend);
+
       messageField.clear();
 
 
@@ -83,28 +91,6 @@ public class ChatMainController {
 
 
 
-    public void addMsg(String message){
-        HBox hb = new HBox();
-        hb.setAlignment(Pos.CENTER_RIGHT);
-        hb.setPadding(new Insets(5,5,5,10));
-        hb.setUserData(User.getInstance());
-        Image imProfil = new Image(getClass().getResourceAsStream("/fileRepository/image/default_avatar_0.png"));
-        ImageView iw = new ImageView(imProfil);
-        iw.setFitWidth(50);
-        iw.setFitHeight(50);
 
-
-        Text text = new Text(message);
-        TextFlow textFlow = new TextFlow(text);
-        textFlow.setPadding(new Insets(5,10,5,10));
-        textFlow.setStyle("-fx-background-color: rgb(15,135,245)");
-
-            hb.getChildren().add(iw);
-            hb.getChildren().add(textFlow);
-            vb_message.getChildren().add(hb);
-
-
-
-    }
 
 }

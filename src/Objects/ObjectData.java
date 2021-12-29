@@ -13,7 +13,16 @@ public class ObjectData implements Serializable {
     private FileObject fileObject;
     private UserData userData;
     private UserData userDataDestintion;
+    private Chat chatRoom;
 
+
+    public Chat getChatRoom() {
+        return chatRoom;
+    }
+
+    public void setChatRoom(Chat chatRoom) {
+        this.chatRoom = chatRoom;
+    }
 
     public ObjectData() {
     }

@@ -1,6 +1,15 @@
 package Managers;
 
+import Objects.MessageObject;
+import Objects.User;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 public class VboxManager {
 
@@ -46,4 +55,8 @@ public class VboxManager {
     public void setVb_message(VBox vb_message) {
         this.vb_message = vb_message;
     }
+
+
+
+
 }

@@ -4,10 +4,14 @@ import Managers.VboxManager;
 import Objects.ObjectData;
 import Objects.User;
 import Panels.MainChatPanel;
+import Repositories.DataSendRepository;
 import Services.ResponseStrategy;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -42,12 +46,23 @@ public class SearchUserService implements ResponseStrategy {
         TextFlow loginFlow = new TextFlow(loginT);
         TextFlow nameFlow = new TextFlow(nameT);
         TextFlow surnameFlow = new TextFlow(surnameT);
+        Button createBtn = new Button("Utworz chat");
+
+        createBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                System.out.println("Chce utworzyc czat z tym uzytkownikiem");
+                DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationCreateChatObject(login));
+            }
+        });
+
         //textFlow.setPadding(new Insets(5,10,5,10));
         //textFlow.setStyle("-fx-background-color: rgb(15,135,245)");
         VBox dane = new VBox();
         HBox imnazw = new HBox();
         imnazw.getChildren().add(nameFlow);
         imnazw.getChildren().add(surnameFlow);
+        imnazw.getChildren().add(createBtn);
         dane.getChildren().add(imnazw);
         dane.getChildren().add(loginFlow);
 

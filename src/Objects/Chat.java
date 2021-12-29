@@ -1,51 +1,52 @@
 package Objects;
 
+import Managers.ChatBoxManager;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Chat {
+public class Chat implements Serializable {
 
-    private int id;
-    private int userID;
-    private int frendID;
+    private int chatID;
+    private ArrayList<Integer> usersID;
     private HashMap<Integer,MessageObject> messageChatList;
     private HashMap<Integer, FileObject> fileChatList;
-
+    int i;
+    public Chat() {
+        this.usersID = new ArrayList<>();
+        this.messageChatList = new HashMap<>();
+        this.fileChatList = new HashMap<>();
+i=0;
+    }
 
     public void addMessage(MessageObject messageObject){
-        this.messageChatList.put(messageObject.getId(), messageObject);
+        i++;
+        messageObject.setIdChatRoom(chatID);
+        this.messageChatList.put(i, messageObject);
+        ChatBoxManager.getInstance().addMsg(messageObject);
+
     }
 
     public MessageObject getMessage(int messageID){
        return this.messageChatList.get(messageID);
     }
 
-
-    public int getId() {
-        return id;
+    public HashMap<Integer, MessageObject> getMessageChatList() {
+        return messageChatList;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getChatID() {
+        return chatID;
     }
 
-    public int getUserID() {
-        return userID;
+    public void setChatID(int chatID) {
+        this.chatID = chatID;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void addUser(int userId){
+        usersID.add(userId);
     }
-
-    public int getFrendID() {
-        return frendID;
-    }
-
-    public void setFrendID(int frendID) {
-        this.frendID = frendID;
-    }
-
-
 
 
 }
