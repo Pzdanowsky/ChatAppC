@@ -1,7 +1,9 @@
 package Objects;
 
+import java.awt.*;
 import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class ObjectData implements Serializable {
 
@@ -13,20 +15,22 @@ public class ObjectData implements Serializable {
     private FileObject fileObject;
     private UserData userData;
     private UserData userDataDestintion;
-    private Chat chatRoom;
+    private ArrayList<Chat> userChatsList;
 
 
-    public Chat getChatRoom() {
-        return chatRoom;
-    }
 
-    public void setChatRoom(Chat chatRoom) {
-        this.chatRoom = chatRoom;
-    }
 
     public ObjectData() {
     }
 
+
+    public ArrayList<Chat> getUserChatsList() {
+        return userChatsList;
+    }
+
+    public void setUserChatsList(ArrayList<Chat> userChatsList) {
+        this.userChatsList = userChatsList;
+    }
 
     public String getCommand() {
         return command;

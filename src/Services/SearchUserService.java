@@ -51,7 +51,7 @@ public class SearchUserService implements ResponseStrategy {
         createBtn.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("Chce utworzyc czat z tym uzytkownikiem");
+
                 DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationCreateChatObject(login));
             }
         });

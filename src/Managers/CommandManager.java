@@ -36,7 +36,7 @@ public class CommandManager {
                     break;
 
                 case "00101":
-                    // Lista znajomych - sprawdzanie aktywnosci
+                    strategy = new ContactListService();
                     break;
 
                 case "00110":
@@ -44,7 +44,7 @@ public class CommandManager {
                     break;
 
                 case "00111":
-                    // Wysyłanie pliku
+                    strategy = new SendMessageService();
                     break;
 
                 case "01000":

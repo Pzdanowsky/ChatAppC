@@ -1,6 +1,7 @@
 package Repositories;
 
 import Managers.ChatBoxManager;
+import Managers.ContactBoxManager;
 import Managers.VboxManager;
 import Objects.Chat;
 import Objects.MessageObject;
@@ -62,11 +63,7 @@ public class ChatRepository {
         openChat.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("Chce utworzyc czat z tym uzytkownikiem");
-                MessageObject messageObject = new MessageObject();
-                messageObject.setData("Siema tu czat: "+ chatRoom.getChatID());
-                messageObject.setFromMessage("user");
-                chatRoom.addMessage(messageObject);
+
                 ChatBoxManager.getInstance().changeActiveChatRoom(chatRoom);
 
 
@@ -80,7 +77,7 @@ public class ChatRepository {
         Platform.runLater(() -> {
             try {
                 System.out.println(Thread.currentThread());
-                VboxManager.getInstance().getVb_contants().getChildren().add(hb);
+                ContactBoxManager.getInstance().getVb_contants().getChildren().add(hb);
             }catch(NullPointerException ex){
                 ex.printStackTrace();
             }

@@ -1,9 +1,6 @@
 package Controllers;
 
-import Managers.ChatBoxManager;
-import Managers.ChatMainPropertyManager;
-import Managers.ThreadsMenager;
-import Managers.VboxManager;
+import Managers.*;
 import Objects.MessageObject;
 import Objects.User;
 import Repositories.DataSendRepository;
@@ -63,7 +60,8 @@ public class ChatMainController {
         tf_search.textProperty().bindBidirectional(pm.searchTextProperty());
        // System.out.println("Thread chatu"+Thread.currentThread());
         VboxManager.getInstance().setVb_search(vb_search);
-        VboxManager.getInstance().setVb_contants(vb_contacts);
+        ContactBoxManager.getInstance().setVb_contants(vb_contacts);
+        ContactBoxManager.getInstance().getRequestContanct();
         ChatBoxManager.getInstance().setVb_messages(vb_message);
     }
 
@@ -80,8 +78,8 @@ public class ChatMainController {
     public void sendMessage(){
      // System.out.println(pm.getMessageTxt());
         MessageObject msgSend = new MessageObject(User.getInstance().getUsername(),pm.getMessageTxt());
-      ChatBoxManager.getInstance().getActiveChat().addMessage(msgSend);
-
+    msgSend.setIdChatRoom(ChatBoxManager.getInstance().getActiveChat().getChatID());
+    DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationSendMessageObject(msgSend));
       messageField.clear();
 
 
