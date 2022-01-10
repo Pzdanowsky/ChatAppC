@@ -1,5 +1,6 @@
 package Services;
 
+import Objects.MessageObject;
 import Objects.ObjectData;
 import Objects.User;
 import Objects.UserData;
@@ -62,5 +63,58 @@ public class PreparationObjectsService {
 
         return objectData;
     }
+
+    public static ObjectData preparationCreateChatObject(String login){
+        UserData userData = new UserData();
+        userData.setSessionToken(User.getInstance().getSessionToken());
+        userData.setSessionNumber(User.getInstance().getSessionNumber());
+        userData.setUsername(User.getInstance().getUsername());
+        userData.setUserID(User.getInstance().getUserID());
+
+        UserData userDataDestination = new UserData();
+        userDataDestination.setUsername(login);
+        objectData = new ObjectData();
+
+        objectData.setUserData(userData);
+        objectData.setUserDataDestintion(userDataDestination);
+        objectData.setCommand("01000");
+        objectData.setDataType("CreateChat-Request");
+        objectData.setAuthenticated(User.getInstance().isAuthenticated());
+
+
+        return objectData;
+    }
+
+    public static ObjectData preparationSendMessageObject(MessageObject messageObject){
+        UserData userData = new UserData();
+        userData.setSessionToken(User.getInstance().getSessionToken());
+        userData.setSessionNumber(User.getInstance().getSessionNumber());
+        userData.setUsername(User.getInstance().getUsername());
+        userData.setUserID(User.getInstance().getUserID());
+
+        objectData = new ObjectData();
+        objectData.setUserData(userData);
+        objectData.setMessageObject(messageObject);
+        objectData.setCommand("00111");
+        objectData.setDataType("SendMessaget-Request");
+        objectData.setAuthenticated(User.getInstance().isAuthenticated());
+        return objectData;
+    }
+
+    public static ObjectData preparationRequestContactList(){
+        UserData userData = new UserData();
+        userData.setSessionToken(User.getInstance().getSessionToken());
+        userData.setSessionNumber(User.getInstance().getSessionNumber());
+        userData.setUsername(User.getInstance().getUsername());
+        userData.setUserID(User.getInstance().getUserID());
+
+        objectData = new ObjectData();
+        objectData.setUserData(userData);
+        objectData.setCommand("00111");
+        objectData.setDataType("SendMessaget-Request");
+        objectData.setAuthenticated(User.getInstance().isAuthenticated());
+        return objectData;
+    }
+
 
 }
