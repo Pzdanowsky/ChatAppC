@@ -26,7 +26,8 @@ public class ServerSocketConnection {
 
     private ServerSocketConnection(){
         try {
-            client = new Socket("localhost", 1909); //192.168.8.108
+            client = new Socket("192.168.1" +
+                    ".100", 1909); //192.168.8.100
             objectOut = new ObjectOutputStream(client.getOutputStream());
             objectIn = new ObjectInputStream(client.getInputStream());
 
