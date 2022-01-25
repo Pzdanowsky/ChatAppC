@@ -16,7 +16,7 @@ public class ObjectData implements Serializable {
     private UserData userData;
     private UserData userDataDestintion;
     private ArrayList<Chat> userChatsList;
-
+    private Objects.Chat chatRoom;
 
 
 
@@ -87,5 +87,13 @@ public class ObjectData implements Serializable {
 
     public void setUserDataDestintion(UserData userDataDestintion) {
         this.userDataDestintion = userDataDestintion;
+    }
+
+    public Chat getChatRoom() {
+        return chatRoom;
+    }
+
+    public void setChatRoom(Chat chatRoom) {
+        this.chatRoom = chatRoom;
     }
 }
