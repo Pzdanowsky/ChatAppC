@@ -32,7 +32,7 @@ public class ContactBoxManager {
 
 
     public void getRequestContanct() {
-        DataSendRepository.getInstance().addDataSend(PreparationObjectsService.)
+       // DataSendRepository.getInstance().addDataSend(PreparationObjectsService.);
 
     }
 }
