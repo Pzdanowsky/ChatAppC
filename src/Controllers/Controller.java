@@ -20,7 +20,7 @@ public class Controller {
 
 
     public void loadLoginPanel(){
-       // LoadPanel loadPanel;
+
        new LoginPanel().load();
     }
 

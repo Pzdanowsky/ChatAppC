@@ -2,11 +2,12 @@ package Repositories;
 
 import Objects.ObjectData;
 import Managers.CommandManager;
+import Services.Observable;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataReciveRepository {
+public class DataReciveRepository implements Observable {
 
     private static DataReciveRepository instance;
     private static Map<String, ObjectData> reciveList;
@@ -17,7 +18,6 @@ public class DataReciveRepository {
         if(instance == null){
             instance = new DataReciveRepository();
         }
-
         return instance;
     }
 
@@ -33,16 +33,12 @@ public class DataReciveRepository {
 
     public void addDataRecive(ObjectData objectDataRecive){
         reciveList.put(objectDataRecive.getDataType(),objectDataRecive);
-        update();
+        notifyObserver();
     }
 
 
 
-    public void update(){
-        observerCommandManager.manage();
-    }
-
-    public ObjectData getObjectData(String dataType){
+    public synchronized ObjectData getObjectData(String dataType){
         if(!reciveList.isEmpty()) {
             ObjectData obj = reciveList.get(dataType);
             reciveList.remove(dataType);
@@ -57,12 +53,14 @@ public class DataReciveRepository {
                 ObjectData objectData = entry.getValue();
                 reciveList.remove(entry.getKey());
                 return objectData;
-
-
             }
         }
         return null;
     }
 
 
+    @Override
+    public void notifyObserver() {
+        observerCommandManager.updateNotify();
+    }
 }

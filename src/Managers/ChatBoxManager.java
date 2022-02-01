@@ -2,26 +2,20 @@ package Managers;
 
 import Objects.Chat;
 import Objects.MessageObject;
-import Objects.User;
-import Repositories.ChatRepository;
-import Repositories.MessageRepository;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import Services.Factors.HboxFactory;
+import Services.Factors.MessageBoxFactor;
+import Services.HBOX;
+import Services.Observer;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 
 import java.util.HashMap;
 
-public class ChatBoxManager {
+public class ChatBoxManager implements Observer {
 
     private static ChatBoxManager instance;
     private VBox vb_message;
     private Chat activeChat;
-    private int lastId;
+    private int lastId =0;
 
 
     public static ChatBoxManager getInstance(){
@@ -33,7 +27,8 @@ public class ChatBoxManager {
     }
 
     private ChatBoxManager(){
-
+    activeChat = new Chat();
+    activeChat.setChatID(-1);
     }
 
     public Chat getActiveChat() {
@@ -47,14 +42,13 @@ public class ChatBoxManager {
     public void changeActiveChatRoom(Chat chatRoom){
         setActiveChat(chatRoom);
         vb_message.getChildren().clear();
+        lastId = 0;
         loadNewChatRoom();
     }
 
     private void loadNewChatRoom() {
         HashMap<Integer,MessageObject> messageChatList = activeChat.getMessageChatList();
-        System.out.println(activeChat.getMessageChatList().size());
         messageChatList.forEach((key,msg)-> addMsg(msg));
-
     }
 
     public void updateChatRoom(Chat chatRoom){
@@ -65,7 +59,6 @@ public class ChatBoxManager {
         }
     }
 
-
     public VBox getVb_messages() {
         return vb_message;
     }
@@ -74,35 +67,21 @@ public class ChatBoxManager {
         this.vb_message = vb_message;
     }
 
-
     public void addMsg(MessageObject message){
-        lastId = message.getId();
-        HBox hb = new HBox();
-      //  if(message.getFromMessage().equals(User.getInstance().getUsername())){
-            hb.setAlignment(Pos.CENTER_RIGHT);
-      //  }else
-     //   {
-        //    hb.setAlignment(Pos.CENTER_LEFT);
-     //   }
+        if(message.getIdChatRoom() == activeChat.getChatID()) {
 
-        hb.setPadding(new Insets(5,5,5,10));
-        hb.setUserData(User.getInstance());
-        Image imProfil = new Image(getClass().getResourceAsStream("/fileRepository/image/default_avatar_0.png"));
-        ImageView iw = new ImageView(imProfil);
-        iw.setFitWidth(50);
-        iw.setFitHeight(50);
+            if(lastId < message.getId()) {
+                HboxFactory hboxFactory = new MessageBoxFactor();
+                HBOX hb = hboxFactory.createHbox();
 
+                hb.create();
+                lastId = message.getId();
+            }
+        }
+    }
 
-        Text text = new Text(message.getData());
-        TextFlow textFlow = new TextFlow(text);
-        textFlow.setPadding(new Insets(5,10,5,10));
-        textFlow.setStyle("-fx-background-color: rgb(15,135,245)");
-
-        hb.getChildren().add(iw);
-        hb.getChildren().add(textFlow);
-        vb_message.getChildren().add(hb);
-
-
-
+    @Override
+    public void updateNotify() {
+       updateChatRoom(activeChat);
     }
 }

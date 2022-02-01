@@ -59,7 +59,6 @@ public class LoginController {
         SendService sendServiceThread = new SendService();
         DataSendRepository.getInstance().setObserverSender(sendServiceThread);
         ReciveService reciverThread = new ReciveService();
-
         ThreadsMenager.getInstance().startRecive(reciverThread);
         CommandManager commandManager = new CommandManager();
         DataReciveRepository.setObserverCommandManager(commandManager);
@@ -76,7 +75,6 @@ public class LoginController {
     }
 
     public void registerAction(ActionEvent actionEvent) {
-        System.out.println("Nauuura rejestracja");
         new RegisterPanel().load();
     }
 

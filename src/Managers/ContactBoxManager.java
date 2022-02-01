@@ -1,10 +1,27 @@
 package Managers;
 
+import Objects.Chat;
+import Repositories.ChatRepository;
 import Repositories.DataSendRepository;
+import Services.Factors.ContactBoxFactor;
+import Services.Factors.HboxFactory;
+import Services.HBOX;
+import Services.Observer;
 import Services.PreparationObjectsService;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
-public class ContactBoxManager {
+import java.util.Map;
+
+public class ContactBoxManager implements Observer {
 
 
     private static ContactBoxManager instance;
@@ -32,7 +49,22 @@ public class ContactBoxManager {
 
 
     public void getRequestContanct() {
-       // DataSendRepository.getInstance().addDataSend(PreparationObjectsService.);
+      DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationRequestContactList());
 
     }
+
+
+    @Override
+    public void updateNotify() {
+        addContacts();
+    }
+
+    public void addContacts() {
+        HboxFactory hboxFactory = new ContactBoxFactor();
+        HBOX hb = hboxFactory.createHbox();
+        hb.create();
+
+
+    }
+
 }

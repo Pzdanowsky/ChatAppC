@@ -5,21 +5,11 @@ import Objects.MessageObject;
 import Objects.User;
 import Repositories.DataSendRepository;
 import Services.PreparationObjectsService;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 
 public class ChatMainController {
 
@@ -58,8 +48,7 @@ public class ChatMainController {
         scrollPane.vvalueProperty().bind(vb_message.heightProperty());
         messageField.textProperty().bindBidirectional(pm.messageTxtProperty());
         tf_search.textProperty().bindBidirectional(pm.searchTextProperty());
-       // System.out.println("Thread chatu"+Thread.currentThread());
-        VboxManager.getInstance().setVb_search(vb_search);
+        SearchBoxManager.getInstance().setVb_search(vb_search);
         ContactBoxManager.getInstance().setVb_contants(vb_contacts);
         ContactBoxManager.getInstance().getRequestContanct();
         ChatBoxManager.getInstance().setVb_messages(vb_message);
@@ -77,10 +66,11 @@ public class ChatMainController {
     @FXML
     public void sendMessage(){
      // System.out.println(pm.getMessageTxt());
-        MessageObject msgSend = new MessageObject(User.getInstance().getUsername(),pm.getMessageTxt());
-    msgSend.setIdChatRoom(ChatBoxManager.getInstance().getActiveChat().getChatID());
+        MessageObject msgSend = new MessageObject(User.getInstance().getUserID(),pm.getMessageTxt(),ChatBoxManager.getInstance().getActiveChat().getChatID());
+         msgSend.setIdChatRoom(ChatBoxManager.getInstance().getActiveChat().getChatID());
     DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationSendMessageObject(msgSend));
-      messageField.clear();
+       // ChatBoxManager.getInstance().addMsg(msgSend);
+    messageField.clear();
 
 
     }

@@ -3,8 +3,10 @@ package Managers;
 import Objects.ObjectData;
 import Repositories.DataReciveRepository;
 import Services.*;
+import Services.ResponseProcessing.*;
 
-public class CommandManager {
+
+public class CommandManager implements Observer {
 
     private static ObjectData objectDataRecive;
     private static ResponseStrategy strategy;
@@ -52,7 +54,7 @@ public class CommandManager {
                     break;
 
                 case "01001":
-                   // strategy = new AddChatRoom();
+                    strategy = new ReciveMessageListService();
                     break;
 
                 case "01010":
@@ -73,5 +75,10 @@ public class CommandManager {
         strategy.processObjectData(objectDataRecive);
 
         }
+    }
+
+    @Override
+    public void updateNotify() {
+        manage();
     }
 }

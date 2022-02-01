@@ -1,120 +1,74 @@
 package Services;
 
-import Objects.MessageObject;
-import Objects.ObjectData;
-import Objects.User;
-import Objects.UserData;
+import Objects.*;
+import Services.Builders.*;
 
 public class PreparationObjectsService {
 
-    private static ObjectData objectData;
-
-
     public static ObjectData preparationLoginObject(){
-        UserData userData = new UserData();
-        userData.setSessionToken(User.getInstance().getSessionToken());
-        userData.setSessionNumber(User.getInstance().getSessionNumber());
-        userData.setUsername(User.getInstance().getUsername());
-        userData.setPassword(User.getInstance().getPassword());
-
-        objectData = new ObjectData();
-        objectData.setUserData(userData);
-        objectData.setCommand("00001");
-        objectData.setDataType("LoginData-Request");
-        objectData.setAuthenticated(User.getInstance().isAuthenticated());
-        return objectData;
+        ObjectDataBuilder objectBuilder = new LoginObjectBuilder();
+        objectBuilder.makeUserData();
+        objectBuilder.makeCommandType();
+        objectBuilder.makeDataType();
+        objectBuilder.makeAuthStatus();
+        return objectBuilder.getObjectData();
     }
 
     public static ObjectData preparationRegisterObject(){
-        UserData userData = new UserData();
-        userData.setSessionToken(User.getInstance().getSessionToken());
-        userData.setSessionNumber(User.getInstance().getSessionNumber());
-        userData.setUsername(User.getInstance().getUsername());
-        userData.setPassword(User.getInstance().getPassword());
-        userData.setNameUser(User.getInstance().getName());
-        userData.setSurname(User.getInstance().getSurname());
-        userData.setEmail(User.getInstance().getEmail());
-
-        objectData = new ObjectData();
-
-        objectData.setUserData(userData);
-        objectData.setCommand("00010");
-        objectData.setDataType("RegisterData-Request");
-        objectData.setAuthenticated(User.getInstance().isAuthenticated());
-        return objectData;
+        ObjectDataBuilder objectDataBuilder = new RegisterObjectBuilder();
+        objectDataBuilder.makeUserData();
+        objectDataBuilder.makeCommandType();
+        objectDataBuilder.makeAuthStatus();
+        return objectDataBuilder.getObjectData();
     }
 
     public static ObjectData preparationSearchUserObject(String username){
-        UserData userData = new UserData();
-        userData.setSessionToken(User.getInstance().getSessionToken());
-        userData.setSessionNumber(User.getInstance().getSessionNumber());
-        userData.setUsername(User.getInstance().getUsername());
-        userData.setUserID(User.getInstance().getUserID());
-
-        UserData userDataDestination = new UserData();
-        userDataDestination.setUsername(username);
-        objectData = new ObjectData();
-
-        objectData.setUserData(userData);
-        objectData.setUserDataDestintion(userDataDestination);
-        objectData.setCommand("00110");
-        objectData.setDataType("SearchUser-Request");
-        objectData.setAuthenticated(User.getInstance().isAuthenticated());
-
-        return objectData;
+        ObjectDataBuilder objectDataBuilder = new SearchUserObjectBuilder();
+        objectDataBuilder.makeUserData();
+        objectDataBuilder.makeUserDataDestination(username);
+        objectDataBuilder.makeCommandType();
+        objectDataBuilder.makeDataType();
+        objectDataBuilder.makeAuthStatus();
+        return objectDataBuilder.getObjectData();
     }
 
-    public static ObjectData preparationCreateChatObject(String login){
-        UserData userData = new UserData();
-        userData.setSessionToken(User.getInstance().getSessionToken());
-        userData.setSessionNumber(User.getInstance().getSessionNumber());
-        userData.setUsername(User.getInstance().getUsername());
-        userData.setUserID(User.getInstance().getUserID());
-
-        UserData userDataDestination = new UserData();
-        userDataDestination.setUsername(login);
-        objectData = new ObjectData();
-
-        objectData.setUserData(userData);
-        objectData.setUserDataDestintion(userDataDestination);
-        objectData.setCommand("01000");
-        objectData.setDataType("CreateChat-Request");
-        objectData.setAuthenticated(User.getInstance().isAuthenticated());
-
-
-        return objectData;
+    public static ObjectData preparationCreateChatObject(String username){
+        ObjectDataBuilder objectDataBuilder = new CreateChatObjectBuilder();
+        objectDataBuilder.makeUserData();
+        objectDataBuilder.makeUserDataDestination(username);
+        objectDataBuilder.makeCommandType();
+        objectDataBuilder.makeDataType();
+        objectDataBuilder.makeAuthStatus();
+        return objectDataBuilder.getObjectData();
     }
 
     public static ObjectData preparationSendMessageObject(MessageObject messageObject){
-        UserData userData = new UserData();
-        userData.setSessionToken(User.getInstance().getSessionToken());
-        userData.setSessionNumber(User.getInstance().getSessionNumber());
-        userData.setUsername(User.getInstance().getUsername());
-        userData.setUserID(User.getInstance().getUserID());
-
-        objectData = new ObjectData();
-        objectData.setUserData(userData);
-        objectData.setMessageObject(messageObject);
-        objectData.setCommand("00111");
-        objectData.setDataType("SendMessaget-Request");
-        objectData.setAuthenticated(User.getInstance().isAuthenticated());
-        return objectData;
+        ObjectDataBuilder objectDataBuilder = new SendMessageObjectBuilder();
+        objectDataBuilder.makeUserData();
+        objectDataBuilder.makeMessageObject(messageObject);
+        objectDataBuilder.makeCommandType();
+        objectDataBuilder.makeDataType();
+        objectDataBuilder.makeAuthStatus();
+        return objectDataBuilder.getObjectData();
     }
 
     public static ObjectData preparationRequestContactList(){
-        UserData userData = new UserData();
-        userData.setSessionToken(User.getInstance().getSessionToken());
-        userData.setSessionNumber(User.getInstance().getSessionNumber());
-        userData.setUsername(User.getInstance().getUsername());
-        userData.setUserID(User.getInstance().getUserID());
-
-        objectData = new ObjectData();
-        objectData.setUserData(userData);
-        objectData.setCommand("00111");
-        objectData.setDataType("SendMessaget-Request");
-        objectData.setAuthenticated(User.getInstance().isAuthenticated());
-        return objectData;
+        ObjectDataBuilder objectDataBuilder = new ContactListObjectBuilder();
+        objectDataBuilder.makeUserData();
+        objectDataBuilder.makeCommandType();
+        objectDataBuilder.makeDataType();
+        objectDataBuilder.makeAuthStatus();
+        return objectDataBuilder.getObjectData();
     }
 
 
+    public static ObjectData preparationRequestMessageList(Chat chatRoom) {
+        ObjectDataBuilder objectDataBuilder = new MessageListObjectBuilder();
+        objectDataBuilder.makeUserData();
+        objectDataBuilder.makeCommandType();
+        objectDataBuilder.makeDataType();
+        objectDataBuilder.addChatToList(chatRoom);
+        objectDataBuilder.makeAuthStatus();
+        return objectDataBuilder.getObjectData();
+    }
 }

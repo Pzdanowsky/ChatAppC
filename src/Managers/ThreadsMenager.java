@@ -29,8 +29,8 @@ public class ThreadsMenager {
 
     public void startRecive(ReciveService rs){
         reciveThread = new Thread(rs);
-       // reciveThread.setDaemon(true);
-        System.out.println(Thread.currentThread());
+
+       // System.out.println(Thread.currentThread());
         reciveThread.start();
     }
 
@@ -51,14 +51,14 @@ public class ThreadsMenager {
     }
 
     public static void setLoadPanels(LoadPanel loadPanels) {
-        System.out.println(loadPanels.toString());
+      //  System.out.println(loadPanels.toString());
         ThreadsMenager.loadPanels = loadPanels;
 
     }
 
 
     public static LoadPanel waitForPanel(){
-        System.out.println(loadPanels.toString());
+     //   System.out.println(loadPanels.toString());
         return loadPanels;
     }
 

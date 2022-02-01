@@ -6,7 +6,8 @@ import Connection.*;
 
 import java.io.ObjectOutputStream;
 
-public class SendService {
+public class SendService implements Observer
+{
 
     private static ObjectOutputStream objectOut;
 
@@ -27,22 +28,19 @@ public class SendService {
                     } else {
                         objectOut.writeObject(objectDataSend);
                         objectOut.reset();
-                        //System.out.println(objectDataSend.getData());
                         objectDataSend = null;
-                        System.out.println("Wysłano");
+
                     }
                     } catch(Exception ex){
-                        ex.printStackTrace();
-                        System.out.println("Send to server ERROR in Services.CommunicationServices:send()");
+                        System.out.println("Request to server ERROR in Services.SendService:send()");
                     }
 
             }
 
-
     }
 
-
-    public void notice(){
+    @Override
+    public void updateNotify() {
         send();
     }
 }

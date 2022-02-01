@@ -1,15 +1,14 @@
-package Services;
+package Services.ResponseProcessing;
 
 import Managers.ChatBoxManager;
-import Managers.VboxManager;
 import Objects.ObjectData;
+import Services.ResponseStrategy;
 import javafx.application.Platform;
 
 public class SendMessageService implements ResponseStrategy {
 
     @Override
     public void processObjectData(ObjectData objectData) {
-        System.out.println("Wiadomość potwierdzona");
 
         Platform.runLater(() -> {
             try {

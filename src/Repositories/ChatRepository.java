@@ -1,30 +1,20 @@
 package Repositories;
 
-import Managers.ChatBoxManager;
 import Managers.ContactBoxManager;
-import Managers.VboxManager;
+import Managers.SearchBoxManager;
 import Objects.Chat;
-import Objects.MessageObject;
+import Services.Observable;
 import Services.PreparationObjectsService;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChatRepository {
+public class ChatRepository implements Observable {
 
     private static ChatRepository instance;
-
+    private ContactBoxManager observerContactBoxManager;
     private static Map<Integer, Chat> chatList;
-    private VboxManager vboxManager;
+    private SearchBoxManager vboxManager;
 
     public static ChatRepository getInstance(){
         if(instance == null){
@@ -41,8 +31,21 @@ public class ChatRepository {
 
 
     public void addChat(Chat chatRoom){
-        chatList.put(chatRoom.getChatID(),chatRoom);
-        update(chatRoom);
+        if(!chatList.isEmpty()){
+            for (Map.Entry<Integer,Chat> chat: chatList.entrySet()) {
+                if(chat.getValue().getChatID() == chatRoom.getChatID()){
+                    System.out.println("Dodano juz tej pokoj");
+                    break;
+                }else{
+                    chatList.put(chatRoom.getChatID(), chatRoom);
+                    update(chatRoom);
+                }
+            }
+        }else {
+            chatList.put(chatRoom.getChatID(), chatRoom);
+            update(chatRoom);
+           //System.out.println("Pusta lista");
+        }
     }
 
     public Chat getChat(int chatId){
@@ -51,37 +54,17 @@ public class ChatRepository {
     }
 
     public void update(Chat chatRoom){
+        DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationRequestMessageList(chatRoom));
+        notifyObserver();
 
-        HBox hb = new HBox();
-        hb.setAlignment(Pos.CENTER);
-        hb.setPadding(new Insets(5,5,5,10));
+    }
 
-        Text chat_t = new Text(String.valueOf(chatRoom.getChatID()));
-        TextFlow loginFlow = new TextFlow(chat_t);
-        Button openChat = new Button("Otworz chat");
+    @Override
+    public void notifyObserver() {
+        ContactBoxManager.getInstance().updateNotify();
+    }
 
-        openChat.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-
-                ChatBoxManager.getInstance().changeActiveChatRoom(chatRoom);
-
-
-
-
-            }
-        });
-
-        hb.getChildren().add(loginFlow);
-        hb.getChildren().add(openChat);
-        Platform.runLater(() -> {
-            try {
-                System.out.println(Thread.currentThread());
-                ContactBoxManager.getInstance().getVb_contants().getChildren().add(hb);
-            }catch(NullPointerException ex){
-                ex.printStackTrace();
-            }
-        });
-
+    public Map<Integer, Chat> getChatList() {
+        return chatList;
     }
 }

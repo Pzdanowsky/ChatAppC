@@ -1,19 +1,20 @@
 package Repositories;
 
 import Objects.ObjectData;
+import Services.Observable;
 import Services.SendService;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataSendRepository {
+public class DataSendRepository implements Observable {
 
     private static DataSendRepository instance;
     private static Map<String, ObjectData> sendList;
     private static SendService observerSendService;
 
 
-    public static DataSendRepository getInstance() {
+    public synchronized static DataSendRepository getInstance() {
         if (instance == null) {
             instance = new DataSendRepository();
         }
@@ -32,11 +33,10 @@ public class DataSendRepository {
     public boolean addDataSend(ObjectData objectDataSend) {
         sendList.put(objectDataSend.getDataType(), objectDataSend);
         if(sendList.get(objectDataSend.getDataType())!= null){
-            update();
+          notifyObserver();
             return true;
         }
         return false;
-
 
     }
 
@@ -46,19 +46,12 @@ public class DataSendRepository {
         return obj;
     }
 
-    public void update(){
-        observerSendService.notice();
-    }
-
-
     public ObjectData iterList(){
         if(!sendList.isEmpty()) {
             for (Map.Entry<String, ObjectData> entry : sendList.entrySet()) {
                 ObjectData objectData = entry.getValue();
                 sendList.remove(entry.getKey());
                     return objectData;
-
-
             }
         }
         return null;
@@ -70,5 +63,10 @@ public class DataSendRepository {
 
     public static void setSendList(Map<String, ObjectData> sendList) {
         DataSendRepository.sendList = sendList;
+    }
+
+    @Override
+    public void notifyObserver() {
+        observerSendService.updateNotify();
     }
 }
