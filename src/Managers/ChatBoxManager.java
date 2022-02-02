@@ -7,8 +7,12 @@ import Services.Factors.HboxFactory;
 import Services.Factors.MessageBoxFactor;
 import Services.HBOX;
 import Services.Observer;
+import javafx.application.Platform;
 import javafx.scene.layout.VBox;
 
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class ChatBoxManager implements Observer {
@@ -16,7 +20,7 @@ public class ChatBoxManager implements Observer {
     private static ChatBoxManager instance;
     private VBox vb_message;
     private Chat activeChat;
-    private int lastId =0;
+    private Timestamp lastTime;
 
 
     public static ChatBoxManager getInstance(){
@@ -30,6 +34,7 @@ public class ChatBoxManager implements Observer {
     private ChatBoxManager(){
     activeChat = new Chat();
     activeChat.setChatID(-1);
+    lastTime = new Timestamp(1000);
     }
 
     public Chat getActiveChat() {
@@ -42,14 +47,27 @@ public class ChatBoxManager implements Observer {
 
     public void changeActiveChatRoom(Chat chatRoom){
         setActiveChat(chatRoom);
-        vb_message.getChildren().clear();
-        lastId = 0;
         loadNewChatRoom();
+
     }
 
     private void loadNewChatRoom() {
-        HashMap<Integer,MessageObject> messageChatList = activeChat.getMessageChatList();
-        messageChatList.forEach((key,msg)-> addMsg(msg));
+
+        Platform.runLater(() -> {
+            try {
+                vb_message.getChildren().clear();
+            }catch(NullPointerException ex){
+                ex.printStackTrace();
+            }
+        });
+
+
+        lastTime = new Timestamp(10);
+        System.out.println("Nowe ładowanie" + lastTime);
+        ArrayList<MessageObject> messageChatList= activeChat.getMessageChatList();
+        messageChatList.sort(Comparator.comparing(MessageObject::getCreated));
+        messageChatList.forEach((msg)->addMsg(msg));
+
     }
 
     public void updateChatRoom(Chat chatRoom){
@@ -71,13 +89,18 @@ public class ChatBoxManager implements Observer {
     public void addMsg(MessageObject message){
         if(message.getIdChatRoom() == activeChat.getChatID()) {
 
-            if(lastId < message.getId()) {
+            System.out.println(lastTime + " vs " + message.getCreated());
+
+            if(message.getCreated().after(lastTime)) {
                 HboxFactory hboxFactory = new MessageBoxFactor();
                 HBOX hb = hboxFactory.createHbox();
                 hb.setMessageObject(message);
                 hb.create();
-                lastId = message.getId();
+              lastTime = message.getCreated();
+                System.out.println(lastTime);
             }
+
+
         }
     }
 

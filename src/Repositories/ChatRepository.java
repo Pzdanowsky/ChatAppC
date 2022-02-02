@@ -64,7 +64,6 @@ public class ChatRepository implements Observable {
     }
 
     public void update(Chat chatRoom){
-        System.out.println("Wielkosc repo: "+ chatList.size());
       DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationRequestMessageList(chatRoom));
         notifyObserver();
     }

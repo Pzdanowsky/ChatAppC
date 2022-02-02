@@ -5,42 +5,45 @@ import Services.Observable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Chat implements Serializable, Observable {
 
     private int chatID;
     private ArrayList<Integer> usersID;
-    private HashMap<Integer,MessageObject> messageChatList;
+    private ArrayList<MessageObject> messageChatList;
     private HashMap<Integer, FileObject> fileChatList;
     int i;
+
 
     public Chat(int chatID) {
         this.chatID = chatID;
         this.usersID = new ArrayList<>();
-        this.messageChatList = new HashMap<>();
+        this.messageChatList = new ArrayList<>();
         this.fileChatList = new HashMap<>();
         i=0;
     }
 
     public Chat() {
         this.usersID = new ArrayList<>();
-        this.messageChatList = new HashMap<>();
+        this.messageChatList = new ArrayList<>();
         this.fileChatList = new HashMap<>();
         i=0;
     }
 
     public void addMessage(MessageObject messageObject){
         messageObject.setIdChatRoom(chatID);
-        this.messageChatList.put(i, messageObject);
+        this.messageChatList.add(messageObject);
+
             notifyObserver();
     }
 
-    public void addMessageList(HashMap<Integer,MessageObject> messageChatList){
-        System.out.println(messageChatList.size());
-        for (MessageObject msg : messageChatList.values())
+    public void addMessageList(ArrayList<MessageObject> messageChatList){
+        for (MessageObject msg : messageChatList)
              {
-            this.messageChatList.put(msg.getId(),msg);
+            this.messageChatList.add(msg);
         }
     }
 
@@ -48,7 +51,7 @@ public class Chat implements Serializable, Observable {
        return this.messageChatList.get(messageID);
     }
 
-    public HashMap<Integer, MessageObject> getMessageChatList() {
+    public ArrayList<MessageObject> getMessageChatList() {
         return messageChatList;
     }
 
