@@ -58,7 +58,7 @@ public class CommandManager implements Observer {
                     break;
 
                 case "01010":
-                    //Pobranie pliku
+                    strategy = new ResponseMessageService();
                     break;
 
                 case "01011":

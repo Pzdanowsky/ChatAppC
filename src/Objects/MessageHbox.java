@@ -1,7 +1,9 @@
 package Objects;
 
 import Managers.ChatBoxManager;
+import Managers.SearchBoxManager;
 import Services.HBOX;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
@@ -55,7 +57,16 @@ public class MessageHbox implements HBOX{
 
     @Override
     public void draw() {
-        ChatBoxManager.getInstance().getVb_messages().getChildren().add(hb);
+
+
+        Platform.runLater(() -> {
+            try {
+                System.out.println(Thread.currentThread().getName());
+                ChatBoxManager.getInstance().getVb_messages().getChildren().add(hb);
+            }catch(NullPointerException ex){
+                ex.printStackTrace();
+            }
+        });
     }
 
     @Override
