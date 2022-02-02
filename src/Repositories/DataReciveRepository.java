@@ -38,7 +38,7 @@ public class DataReciveRepository implements Observable {
 
 
 
-    public synchronized ObjectData getObjectData(String dataType){
+    public ObjectData getObjectData(String dataType){
         if(!reciveList.isEmpty()) {
             ObjectData obj = reciveList.get(dataType);
             reciveList.remove(dataType);

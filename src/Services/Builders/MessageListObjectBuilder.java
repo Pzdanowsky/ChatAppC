@@ -7,14 +7,19 @@ import java.util.List;
 public class MessageListObjectBuilder implements ObjectDataBuilder{
 
     private ObjectData objectData;
+    private Chat chat;
 
-    public MessageListObjectBuilder() {
-        this.objectData = new ObjectData();
+    public MessageListObjectBuilder(Chat chat) {
+        this.chat = chat;
     }
 
+
     @Override
-    public void makeAuthStatus() {
-        objectData.setAuthenticated(User.getInstance().isAuthenticated());
+    public void makeObject(ObjectData objectData) {
+        this.objectData = objectData;
+        makeCommandType();
+        makeDataType();
+        addChatToList(chat);
     }
 
     @Override
@@ -27,37 +32,6 @@ public class MessageListObjectBuilder implements ObjectDataBuilder{
         objectData.setDataType("InitMessageListt-Request");
     }
 
-    @Override
-    public void makeUserData() {
-        UserData userData = new UserData();
-        userData.setSessionToken(User.getInstance().getSessionToken());
-        userData.setSessionNumber(User.getInstance().getSessionNumber());
-        userData.setUsername(User.getInstance().getUsername());
-        userData.setUserID(User.getInstance().getUserID());
-        objectData.setUserData(userData);
-    }
-
-    @Override
-    public void makeUserDataDestination(String username) {
-
-    }
-
-    @Override
-    public void makeMessageObject(MessageObject message) {
-
-    }
-
-    @Override
-    public void makeChatList() {
-
-    }
-
-    @Override
-    public void addChatList(List<Chat> chatList) {
-
-    }
-
-    @Override
     public void addChatToList(Chat chatRoom) {
         objectData.addChatToList(chatRoom);
     }

@@ -14,7 +14,7 @@ public class DataSendRepository implements Observable {
     private static SendService observerSendService;
 
 
-    public synchronized static DataSendRepository getInstance() {
+    public static DataSendRepository getInstance() {
         if (instance == null) {
             instance = new DataSendRepository();
         }

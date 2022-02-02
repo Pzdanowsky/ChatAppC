@@ -23,10 +23,13 @@ public class User {
         return instance;
     }
 
-    public User(){
+    private User(){
     this.sessionNumber = "00000";
     this.sessionToken = "0000000000";
     this.authenticated = false;
+    this.name = "null";
+    this.surname = "null";
+    this.email = "null";
     }
 
     public String getUsername() {

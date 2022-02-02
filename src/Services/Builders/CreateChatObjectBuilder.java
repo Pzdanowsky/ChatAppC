@@ -7,14 +7,18 @@ import java.util.List;
 public class CreateChatObjectBuilder implements ObjectDataBuilder{
 
     private ObjectData objectData;
+    private String username;
 
-    public CreateChatObjectBuilder() {
-        this.objectData = new ObjectData();
+    public CreateChatObjectBuilder(String username) {
+       this.username = username;
     }
-    @Override
-    public void makeAuthStatus() {
-        objectData.setAuthenticated(User.getInstance().isAuthenticated());
 
+    @Override
+    public void makeObject(ObjectData objectData) {
+        this.objectData = objectData;
+        makeCommandType();
+        makeDataType();
+        makeUserDataDestination(username);
     }
 
     @Override
@@ -29,41 +33,10 @@ public class CreateChatObjectBuilder implements ObjectDataBuilder{
 
     }
 
-    @Override
-    public void makeUserData() {
-        UserData userData = new UserData();
-        userData.setSessionToken(User.getInstance().getSessionToken());
-        userData.setSessionNumber(User.getInstance().getSessionNumber());
-        userData.setUsername(User.getInstance().getUsername());
-        userData.setUserID(User.getInstance().getUserID());
-        objectData.setUserData(userData);
-    }
-
-    @Override
     public void makeUserDataDestination(String username) {
         UserData userDataDestination = new UserData();
         userDataDestination.setUsername(username);
         objectData.setUserDataDestintion(userDataDestination);
-
-    }
-
-    @Override
-    public void makeMessageObject(MessageObject message) {
-
-    }
-
-    @Override
-    public void makeChatList() {
-
-    }
-
-    @Override
-    public void addChatList(List<Chat> chatList) {
-
-    }
-
-    @Override
-    public void addChatToList(Chat chatRoom) {
 
     }
 

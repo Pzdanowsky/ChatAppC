@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 
 public class MessageHbox implements HBOX{
-    HBox hb = new HBox();
+    HBox hb;
     MessageObject message;
 
     @Override
@@ -22,7 +22,7 @@ public class MessageHbox implements HBOX{
 
     @Override
     public void render() {
-
+        hb = new HBox();
         if(message.getAuthorId() == User.getInstance().getUserID()){
             hb.setAlignment(Pos.CENTER_RIGHT);
         }else

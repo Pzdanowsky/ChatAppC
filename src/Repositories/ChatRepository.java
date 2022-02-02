@@ -6,14 +6,17 @@ import Objects.Chat;
 import Services.Observable;
 import Services.PreparationObjectsService;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.*;
+import java.util.*;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ChatRepository implements Observable {
 
     private static ChatRepository instance;
     private ContactBoxManager observerContactBoxManager;
-    private static Map<Integer, Chat> chatList;
+    private volatile static CopyOnWriteArrayList<Chat> chatList;
+    private volatile static ConcurrentModificationException chats;
     private SearchBoxManager vboxManager;
 
     public static ChatRepository getInstance(){
@@ -26,37 +29,44 @@ public class ChatRepository implements Observable {
 
 
     private ChatRepository(){
-        chatList = new HashMap<>();
+        chatList = new CopyOnWriteArrayList<>();
+
     }
 
 
     public void addChat(Chat chatRoom){
+
         if(!chatList.isEmpty()){
-            for (Map.Entry<Integer,Chat> chat: chatList.entrySet()) {
-                if(chat.getValue().getChatID() == chatRoom.getChatID()){
+
+                if(chatList.contains(chatRoom)){
                     System.out.println("Dodano juz tej pokoj");
-                    break;
+
                 }else{
-                    chatList.put(chatRoom.getChatID(), chatRoom);
+                    chatList.add(chatRoom);
                     update(chatRoom);
                 }
-            }
+
         }else {
-            chatList.put(chatRoom.getChatID(), chatRoom);
+            System.out.println("Puusta lista: "+chatRoom.getChatID());
+            chatList.add(chatRoom);
             update(chatRoom);
-           //System.out.println("Pusta lista");
         }
     }
 
     public Chat getChat(int chatId){
+        for (Chat chat: chatList) {
+            if(chat.getChatID() == chatId){
+                return chat;
+            }
+        }
 
-        return chatList.get(chatId);
+        return null;
     }
 
     public void update(Chat chatRoom){
-        DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationRequestMessageList(chatRoom));
+        System.out.println("Wielkosc repo: "+ chatList.size());
+      DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationRequestMessageList(chatRoom));
         notifyObserver();
-
     }
 
     @Override
@@ -64,7 +74,7 @@ public class ChatRepository implements Observable {
         ContactBoxManager.getInstance().updateNotify();
     }
 
-    public Map<Integer, Chat> getChatList() {
+    public List<Chat> getChatList() {
         return chatList;
     }
 }

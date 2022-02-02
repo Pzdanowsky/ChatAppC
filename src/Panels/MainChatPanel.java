@@ -12,7 +12,6 @@ import java.io.IOException;
 
 public class MainChatPanel implements LoadPanel {
 
-    private StackPane stackPane = MainController.getInstance().getStackPane();
 
     private Stage primaryStage = MainController.getInstance().getStage();
 
@@ -37,15 +36,12 @@ public class MainChatPanel implements LoadPanel {
     @Override
     public void setScene(Pane pane) {
 
-
         Scene scena = new Scene(pane,1100,700);
-       // scena.getStylesheets().add(StyleUtils.BUTTON_CSS_FILE);
         primaryStage.setScene(scena);
         primaryStage.setTitle("Chat Aplikacja");
         primaryStage.centerOnScreen();
         primaryStage.show();
-              //  stackPane.getChildren().clear();
-              //  stackPane.getChildren().add(pane);
+
 
 
 

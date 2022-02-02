@@ -17,46 +17,44 @@ import javafx.scene.text.TextFlow;
 import java.util.Map;
 
 public class ContactHbox implements HBOX {
+
     private Chat chat;
-    private HBox hb;
+    private HBox hb = new HBox();
     private TextFlow loginFlow;
     private Button openChat;
-    private Map<Integer,Chat> tempChats;
     private Text chat_t;
 
 
     @Override
     public void create() {
-        clear();
+        //clear();
         render();
+        draw();
     }
 
     @Override
     public void render() {
 
-        for (Map.Entry<Integer, Chat> tempChats : ChatRepository.getInstance().getChatList().entrySet()) {
-            hb  = new HBox();
-            chat = tempChats.getValue();
             hb.setAlignment(Pos.CENTER);
             hb.setPadding(new Insets(5, 5, 5, 10));
 
-            chat_t = new Text(String.valueOf(tempChats.getKey()));
+            chat_t = new Text(String.valueOf(chat.getChatID()));
             loginFlow = new TextFlow(chat_t);
             openChat = new Button("Otworz chat");
+            onClick();
+        hb.getChildren().add(loginFlow);
+        hb.getChildren().add(openChat);
+        }
 
-            hb.getChildren().add(loginFlow);
-            hb.getChildren().add(openChat);
-        onClick();
-        draw();
-        }
-        }
 
     @Override
     public void onClick() {
         openChat.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                System.out.println("Wciskasz ID:" +chat.getChatID());
                 ChatBoxManager.getInstance().changeActiveChatRoom(chat);
+
             }
         });
     }
@@ -67,7 +65,6 @@ public class ContactHbox implements HBOX {
             try {
 
                ContactBoxManager.getInstance().getVb_contants().getChildren().add(hb);
-               hb.getChildren().clear();
             } catch (NullPointerException ex) {
                 ex.printStackTrace();
             }
@@ -87,7 +84,8 @@ public class ContactHbox implements HBOX {
 
     @Override
     public void setChat(Chat chat) {
-
+    this.chat = chat;
+    create();
     }
 
 

@@ -38,7 +38,6 @@ public class RegisterController {
         loginField.textProperty().bindBidirectional(rpm.loginPropertyProperty());
         passwordField.textProperty().bindBidirectional(rpm.passwordPropertyProperty());
         emailField.textProperty().bindBidirectional(rpm.emailPropertyProperty());
-
         System.out.println("Działa");
     }
 

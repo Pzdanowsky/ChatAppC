@@ -28,7 +28,6 @@ public class SendService implements Observer
                     } else {
                         objectOut.writeObject(objectDataSend);
                         objectOut.reset();
-                        objectDataSend = null;
 
                     }
                     } catch(Exception ex){

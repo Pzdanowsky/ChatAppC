@@ -1,10 +1,11 @@
-package Services;
+package Services.ResponseProcessing;
 
 import Managers.SearchBoxManager;
 import Objects.ObjectData;
 import Objects.User;
 import Objects.UserData;
 import Repositories.DataSendRepository;
+import Services.ResponseStrategy;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

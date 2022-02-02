@@ -5,70 +5,48 @@ import Services.Builders.*;
 
 public class PreparationObjectsService {
 
+    private static MainObjectBuilder mainObjectBuilder;
+
     public static ObjectData preparationLoginObject(){
-        ObjectDataBuilder objectBuilder = new LoginObjectBuilder();
-        objectBuilder.makeUserData();
-        objectBuilder.makeCommandType();
-        objectBuilder.makeDataType();
-        objectBuilder.makeAuthStatus();
-        return objectBuilder.getObjectData();
+        ObjectDataBuilder loginObject = new LoginObjectBuilder();
+        mainObjectBuilder = new ObjectDirectorBuilder(loginObject);
+        return mainObjectBuilder.creationObjectData();
     }
 
     public static ObjectData preparationRegisterObject(){
-        ObjectDataBuilder objectDataBuilder = new RegisterObjectBuilder();
-        objectDataBuilder.makeUserData();
-        objectDataBuilder.makeCommandType();
-        objectDataBuilder.makeAuthStatus();
-        return objectDataBuilder.getObjectData();
+        ObjectDataBuilder registerObject = new RegisterObjectBuilder();
+        mainObjectBuilder = new ObjectDirectorBuilder(registerObject);
+        return mainObjectBuilder.creationObjectData();
     }
 
     public static ObjectData preparationSearchUserObject(String username){
-        ObjectDataBuilder objectDataBuilder = new SearchUserObjectBuilder();
-        objectDataBuilder.makeUserData();
-        objectDataBuilder.makeUserDataDestination(username);
-        objectDataBuilder.makeCommandType();
-        objectDataBuilder.makeDataType();
-        objectDataBuilder.makeAuthStatus();
-        return objectDataBuilder.getObjectData();
+        ObjectDataBuilder searchObject = new SearchUserObjectBuilder(username);
+        mainObjectBuilder = new ObjectDirectorBuilder(searchObject);
+        return mainObjectBuilder.creationObjectData();
     }
 
     public static ObjectData preparationCreateChatObject(String username){
-        ObjectDataBuilder objectDataBuilder = new CreateChatObjectBuilder();
-        objectDataBuilder.makeUserData();
-        objectDataBuilder.makeUserDataDestination(username);
-        objectDataBuilder.makeCommandType();
-        objectDataBuilder.makeDataType();
-        objectDataBuilder.makeAuthStatus();
-        return objectDataBuilder.getObjectData();
+        ObjectDataBuilder createChatObject = new CreateChatObjectBuilder(username);
+        mainObjectBuilder = new ObjectDirectorBuilder(createChatObject);
+        return mainObjectBuilder.creationObjectData();
     }
 
     public static ObjectData preparationSendMessageObject(MessageObject messageObject){
-        ObjectDataBuilder objectDataBuilder = new SendMessageObjectBuilder();
-        objectDataBuilder.makeUserData();
-        objectDataBuilder.makeMessageObject(messageObject);
-        objectDataBuilder.makeCommandType();
-        objectDataBuilder.makeDataType();
-        objectDataBuilder.makeAuthStatus();
-        return objectDataBuilder.getObjectData();
+        ObjectDataBuilder messageCreateObject = new SendMessageObjectBuilder(messageObject);
+        mainObjectBuilder = new ObjectDirectorBuilder(messageCreateObject);
+        return mainObjectBuilder.creationObjectData();
     }
 
     public static ObjectData preparationRequestContactList(){
-        ObjectDataBuilder objectDataBuilder = new ContactListObjectBuilder();
-        objectDataBuilder.makeUserData();
-        objectDataBuilder.makeCommandType();
-        objectDataBuilder.makeDataType();
-        objectDataBuilder.makeAuthStatus();
-        return objectDataBuilder.getObjectData();
+        ObjectDataBuilder contactListObject = new ContactListObjectBuilder();
+        mainObjectBuilder = new ObjectDirectorBuilder(contactListObject);
+        return mainObjectBuilder.creationObjectData();
     }
 
 
     public static ObjectData preparationRequestMessageList(Chat chatRoom) {
-        ObjectDataBuilder objectDataBuilder = new MessageListObjectBuilder();
-        objectDataBuilder.makeUserData();
-        objectDataBuilder.makeCommandType();
-        objectDataBuilder.makeDataType();
-        objectDataBuilder.addChatToList(chatRoom);
-        objectDataBuilder.makeAuthStatus();
-        return objectDataBuilder.getObjectData();
+        ObjectDataBuilder chatMessagesObject = new MessageListObjectBuilder(chatRoom);
+        mainObjectBuilder = new ObjectDirectorBuilder(chatMessagesObject);
+        return mainObjectBuilder.creationObjectData();
     }
 }

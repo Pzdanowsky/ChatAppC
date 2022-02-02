@@ -1,6 +1,8 @@
 package Managers;
 
 import Objects.Chat;
+import Objects.ObjectData;
+import Objects.User;
 import Repositories.ChatRepository;
 import Repositories.DataSendRepository;
 import Services.Factors.ContactBoxFactor;
@@ -61,9 +63,11 @@ public class ContactBoxManager implements Observer {
 
     public void addContacts() {
         HboxFactory hboxFactory = new ContactBoxFactor();
-        HBOX hb = hboxFactory.createHbox();
-        hb.create();
+        int lastElement = ChatRepository.getInstance().getChatList().size()-1;
+         System.out.println(lastElement);
 
+            HBOX hb = hboxFactory.createHbox();
+            hb.setChat(ChatRepository.getInstance().getChatList().get(lastElement));
 
     }
 

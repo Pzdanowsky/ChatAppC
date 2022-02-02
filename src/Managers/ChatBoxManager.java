@@ -1,6 +1,7 @@
 package Managers;
 
 import Objects.Chat;
+import Objects.MessageHbox;
 import Objects.MessageObject;
 import Services.Factors.HboxFactory;
 import Services.Factors.MessageBoxFactor;
@@ -73,7 +74,7 @@ public class ChatBoxManager implements Observer {
             if(lastId < message.getId()) {
                 HboxFactory hboxFactory = new MessageBoxFactor();
                 HBOX hb = hboxFactory.createHbox();
-
+                hb.setMessageObject(message);
                 hb.create();
                 lastId = message.getId();
             }

@@ -27,14 +27,13 @@ public class Chat implements Serializable, Observable {
         this.usersID = new ArrayList<>();
         this.messageChatList = new HashMap<>();
         this.fileChatList = new HashMap<>();
-i=0;
+        i=0;
     }
 
     public void addMessage(MessageObject messageObject){
         messageObject.setIdChatRoom(chatID);
         this.messageChatList.put(i, messageObject);
             notifyObserver();
-
     }
 
     public void addMessageList(HashMap<Integer,MessageObject> messageChatList){
@@ -42,7 +41,6 @@ i=0;
         for (MessageObject msg : messageChatList.values())
              {
             this.messageChatList.put(msg.getId(),msg);
-
         }
     }
 
@@ -66,9 +64,9 @@ i=0;
         usersID.add(userId);
     }
 
-
     @Override
     public void notifyObserver() {
         ChatBoxManager.getInstance().updateNotify();
     }
+
 }
