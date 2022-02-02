@@ -49,4 +49,10 @@ public class PreparationObjectsService {
         mainObjectBuilder = new ObjectDirectorBuilder(chatMessagesObject);
         return mainObjectBuilder.creationObjectData();
     }
+
+    public static ObjectData preparationCloseProgram() {
+        ObjectDataBuilder closeProgramObject = new CloseProgramRequest();
+        mainObjectBuilder = new ObjectDirectorBuilder(closeProgramObject);
+        return mainObjectBuilder.creationObjectData();
+    }
 }
