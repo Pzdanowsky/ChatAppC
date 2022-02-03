@@ -1,5 +1,6 @@
 package Managers;
 
+import ClientSystem.ClientSystem;
 import Objects.Chat;
 import Objects.MessageHbox;
 import Objects.MessageObject;
@@ -53,14 +54,15 @@ public class ChatBoxManager implements Observer {
 
     private void loadNewChatRoom() {
 
-        Platform.runLater(() -> {
-            try {
-                vb_message.getChildren().clear();
-            }catch(NullPointerException ex){
-                ex.printStackTrace();
-            }
-        });
-
+        if(ClientSystem.IS_TEST==false) {
+            Platform.runLater(() -> {
+                try {
+                    vb_message.getChildren().clear();
+                } catch (NullPointerException ex) {
+                    ex.printStackTrace();
+                }
+            });
+        }
 
         lastTime = new Timestamp(10);
         ArrayList<MessageObject> messageChatList= activeChat.getMessageChatList();
@@ -90,13 +92,15 @@ public class ChatBoxManager implements Observer {
 
 
 
-            if(message.getCreated().after(lastTime)) {
-                HboxFactory hboxFactory = new MessageBoxFactor();
-                HBOX hb = hboxFactory.createHbox();
-                hb.setMessageObject(message);
-                hb.create();
-              lastTime = message.getCreated();
-            }
+           if(ClientSystem.IS_TEST==false){
+               if(message.getCreated().after(lastTime)) {
+                   HboxFactory hboxFactory = new MessageBoxFactor();
+                   HBOX hb = hboxFactory.createHbox();
+                   hb.setMessageObject(message);
+                   hb.create();
+                   lastTime = message.getCreated();
+               }
+           }
 
 
         }

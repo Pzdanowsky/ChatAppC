@@ -1,5 +1,6 @@
 package Tests;
 
+import ClientSystem.ClientSystem;
 import Objects.*;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ChatTests {
     @Test
     void shouldSayThatSimpleMessageIsSend(){
+        ClientSystem.IS_TEST=true;
         String testString = "TEST";
         Chat chat = new Chat();
         assertEquals(0, chat.getMessageChatList().size());

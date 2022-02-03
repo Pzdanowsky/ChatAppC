@@ -5,6 +5,7 @@ import Objects.Chat;
 import Objects.MessageObject;
 import javafx.scene.layout.VBox;
 import org.junit.jupiter.api.Test;
+import ClientSystem.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -12,6 +13,7 @@ public class ChatBoxManagerTest {
 
     @Test
     void shouldSetChat(){
+        ClientSystem.IS_TEST=true;
         String testString  = "TEST";
         Chat chat = new Chat();
         MessageObject messageObject1 = new MessageObject(1, testString, 1);
@@ -23,6 +25,7 @@ public class ChatBoxManagerTest {
 
     @Test
     void shouldChangeChat(){
+        ClientSystem.IS_TEST=true;
         String testString  = "TEST";
         Chat chat = new Chat();
         MessageObject messageObject1 = new MessageObject(1, testString, 1);
