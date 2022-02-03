@@ -44,6 +44,13 @@ public class ChatMainController {
     @FXML
     private Button searchBTN;
 
+    @FXML
+    private Button addUserBTN;
+
+    @FXML
+    private TextField addUserTF;
+
+
     private ChatMainPropertyManager pm = new ChatMainPropertyManager();
 
     @FXML
@@ -51,6 +58,7 @@ public class ChatMainController {
         scrollPane.vvalueProperty().bind(vb_message.heightProperty());
         messageField.textProperty().bindBidirectional(pm.messageTxtProperty());
         tf_search.textProperty().bindBidirectional(pm.searchTextProperty());
+        addUserTF.textProperty().bindBidirectional(pm.addTextProperty());
         SearchBoxManager.getInstance().setVb_search(vb_search);
         ContactBoxManager.getInstance().setVb_contants(vb_contacts);
         ContactBoxManager.getInstance().getRequestContanct();
@@ -76,6 +84,12 @@ public class ChatMainController {
        // ChatBoxManager.getInstance().addMsg(msgSend);
     messageField.clear();
 
+    }
+
+    @FXML
+    public void addUser(){
+        System.out.println(pm.getAddText());
+        DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationAddUserToChat(pm.getAddText()));
     }
 
 

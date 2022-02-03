@@ -7,8 +7,7 @@ import Services.ResponseStrategy;
 public class AddChatByOther implements ResponseStrategy {
     @Override
     public void processObjectData(ObjectData objectData) {
-
-        System.out.println("mam");
+        System.out.println("Odebrałem");
         ChatRepository.getInstance().addChat(objectData.getChatRoomList().get(0));
     }
 }

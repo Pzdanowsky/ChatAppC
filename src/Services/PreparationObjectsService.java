@@ -55,4 +55,10 @@ public class PreparationObjectsService {
         mainObjectBuilder = new ObjectDirectorBuilder(closeProgramObject);
         return mainObjectBuilder.creationObjectData();
     }
+
+    public static ObjectData preparationAddUserToChat(String username) {
+        ObjectDataBuilder addUserObject = new AddUser(username);
+        mainObjectBuilder = new ObjectDirectorBuilder(addUserObject);
+        return mainObjectBuilder.creationObjectData();
+    }
 }
