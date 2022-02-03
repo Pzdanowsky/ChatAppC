@@ -61,7 +61,6 @@ public class MessageHbox implements HBOX{
 
         Platform.runLater(() -> {
             try {
-                System.out.println(Thread.currentThread().getName());
                 ChatBoxManager.getInstance().getVb_messages().getChildren().add(hb);
             }catch(NullPointerException ex){
                 ex.printStackTrace();

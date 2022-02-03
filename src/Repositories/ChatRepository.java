@@ -35,7 +35,6 @@ public class ChatRepository implements Observable {
 
 
     public void addChat(Chat chatRoom){
-
         if(!chatList.isEmpty()){
 
                 if(chatList.contains(chatRoom)){
@@ -47,7 +46,6 @@ public class ChatRepository implements Observable {
                 }
 
         }else {
-            System.out.println("Puusta lista: "+chatRoom.getChatID());
             chatList.add(chatRoom);
             update(chatRoom);
         }
@@ -64,7 +62,6 @@ public class ChatRepository implements Observable {
     }
 
     public void update(Chat chatRoom){
-        System.out.println("Wielkosc repo: "+ chatList.size());
       DataSendRepository.getInstance().addDataSend(PreparationObjectsService.preparationRequestMessageList(chatRoom));
         notifyObserver();
     }

@@ -2,6 +2,7 @@ package Services.ResponseProcessing;
 
 import Managers.ChatBoxManager;
 import Objects.ObjectData;
+import Repositories.ChatRepository;
 import Services.ResponseStrategy;
 import javafx.application.Platform;
 
@@ -12,7 +13,8 @@ public class SendMessageService implements ResponseStrategy {
 
         Platform.runLater(() -> {
             try {
-                ChatBoxManager.getInstance().getActiveChat().addMessage(objectData.getMessageObject());
+                ChatRepository.getInstance().getChat(objectData.getMessageObject().getIdChatRoom()).addMessage(objectData.getMessageObject());
+               // ChatBoxManager.getInstance().getActiveChat().addMessage(objectData.getMessageObject());
             }catch(NullPointerException ex){
                 ex.printStackTrace();
             }

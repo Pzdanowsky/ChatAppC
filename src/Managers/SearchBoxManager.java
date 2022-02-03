@@ -42,13 +42,6 @@ public class SearchBoxManager {
         hb.setUserData(user);
         hb.create();
 
-
-
-
-        //textFlow.setPadding(new Insets(5,10,5,10));
-        //textFlow.setStyle("-fx-background-color: rgb(15,135,245)");
-
-
     }
 
 

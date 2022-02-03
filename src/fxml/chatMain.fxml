@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <Pane xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.ChatMainController">
    <children>
@@ -18,7 +19,7 @@
                <children>
                   <TabPane layoutX="27.0" layoutY="34.0" prefHeight="633.0" prefWidth="399.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
-                      <Tab text="KONTAKTY">
+                      <Tab fx:id="tabKontakt" text="KONTAKTY">
                         <content>
                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -58,6 +59,9 @@
                   </ScrollPane>
                   <Button fx:id="messageBTN" layoutX="567.0" layoutY="642.0" mnemonicParsing="false" onAction="#sendMessage" text="Wyślij" />
                   <TextField fx:id="messageField" layoutX="297.0" layoutY="633.0" prefHeight="34.0" prefWidth="181.0" />
+                  <TextField fx:id="addUserTF" layoutX="148.0" layoutY="81.0" prefHeight="32.0" prefWidth="264.0" />
+                  <Button fx:id="addUserBTN" layoutX="463.0" layoutY="81.0" mnemonicParsing="false" onAction="#addUser" text="Dodaj" />
+                  <Text layoutX="148.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodaj użytkownika do czatu" wrappingWidth="221.30338287353516" />
                </children>
             </AnchorPane>
          </children>

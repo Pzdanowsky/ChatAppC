@@ -4,14 +4,10 @@ import Objects.ObjectData;
 import Repositories.ChatRepository;
 import Services.ResponseStrategy;
 
-public class CreateChatService implements ResponseStrategy {
-
+public class AddChatByOther implements ResponseStrategy {
     @Override
     public void processObjectData(ObjectData objectData) {
-
-        if(!objectData.getChatRoomList().isEmpty()) {
-            ChatRepository.getInstance().addChat(objectData.getChatRoomList().get(0));
-
-        }
+        System.out.println("Odebrałem");
+        ChatRepository.getInstance().addChat(objectData.getChatRoomList().get(0));
     }
 }

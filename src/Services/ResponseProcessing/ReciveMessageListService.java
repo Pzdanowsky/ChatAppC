@@ -13,8 +13,6 @@ public class ReciveMessageListService implements ResponseStrategy {
         if(objectData.getChatRoomList().isEmpty()){
             System.out.println("Brak wiadomosci");
         }else {
-            System.out.println("Odebrano wiadomości dla czatu: "+objectData.getChatRoomList().get(0).getChatID());
-
             ChatRepository.getInstance().getChat(objectData.getChatRoomList().get(0).getChatID())
                     .addMessageList(objectData.getChatRoomList().get(0).getMessageChatList());
         }

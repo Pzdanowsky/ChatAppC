@@ -62,7 +62,7 @@ public class CommandManager implements Observer {
                     break;
 
                 case "01011":
-                    //Pobranie starszy wiadomości
+                    strategy = new AddChatByOther();
                     break;
 
                 case "01100":
