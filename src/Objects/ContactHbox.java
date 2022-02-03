@@ -24,6 +24,8 @@ public class ContactHbox implements HBOX {
     private Button openChat;
     private Text chat_t;
 
+    public static  boolean IS_TEST = false;
+
 
     @Override
     public void create() {
@@ -84,8 +86,10 @@ public class ContactHbox implements HBOX {
 
     @Override
     public void setChat(Chat chat) {
-    this.chat = chat;
-    create();
+        this.chat = chat;
+        if (IS_TEST == false){
+            create();
+        }
     }
 
 
