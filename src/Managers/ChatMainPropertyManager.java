@@ -9,6 +9,19 @@ public class ChatMainPropertyManager {
 
     private StringProperty searchText = new SimpleStringProperty();
 
+    private StringProperty addText = new SimpleStringProperty();
+
+    public String getAddText() {
+        return addText.get();
+    }
+
+    public StringProperty addTextProperty() {
+        return addText;
+    }
+
+    public void setAddText(String addText) {
+        this.addText.set(addText);
+    }
 
     public String getSearchText() {
         return searchText.get();

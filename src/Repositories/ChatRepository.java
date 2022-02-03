@@ -46,7 +46,6 @@ public class ChatRepository implements Observable {
                 }
 
         }else {
-            System.out.println("Puusta lista: "+chatRoom.getChatID());
             chatList.add(chatRoom);
             update(chatRoom);
         }
