@@ -62,10 +62,9 @@ public class ContactBoxManager implements Observer {
     }
 
     public void addContacts() {
-        HboxFactory hboxFactory = new ContactBoxFactor();
-        int lastElement = ChatRepository.getInstance().getChatList().size()-1;
-         System.out.println(lastElement);
 
+            HboxFactory hboxFactory = new ContactBoxFactor();
+             int lastElement = ChatRepository.getInstance().getChatList().size()-1;
             HBOX hb = hboxFactory.createHbox();
             hb.setChat(ChatRepository.getInstance().getChatList().get(lastElement));
 

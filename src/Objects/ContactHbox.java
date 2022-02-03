@@ -52,7 +52,6 @@ public class ContactHbox implements HBOX {
         openChat.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                System.out.println("Wciskasz ID:" +chat.getChatID());
                 ChatBoxManager.getInstance().changeActiveChatRoom(chat);
 
             }
