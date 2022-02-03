@@ -63,7 +63,6 @@ public class ChatBoxManager implements Observer {
 
 
         lastTime = new Timestamp(10);
-        System.out.println("Nowe ładowanie" + lastTime);
         ArrayList<MessageObject> messageChatList= activeChat.getMessageChatList();
         messageChatList.sort(Comparator.comparing(MessageObject::getCreated));
         messageChatList.forEach((msg)->addMsg(msg));
@@ -89,7 +88,7 @@ public class ChatBoxManager implements Observer {
     public void addMsg(MessageObject message){
         if(message.getIdChatRoom() == activeChat.getChatID()) {
 
-            System.out.println(lastTime + " vs " + message.getCreated());
+
 
             if(message.getCreated().after(lastTime)) {
                 HboxFactory hboxFactory = new MessageBoxFactor();
@@ -97,7 +96,6 @@ public class ChatBoxManager implements Observer {
                 hb.setMessageObject(message);
                 hb.create();
               lastTime = message.getCreated();
-                System.out.println(lastTime);
             }
 
 

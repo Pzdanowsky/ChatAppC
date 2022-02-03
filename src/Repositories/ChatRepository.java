@@ -35,7 +35,6 @@ public class ChatRepository implements Observable {
 
 
     public void addChat(Chat chatRoom){
-
         if(!chatList.isEmpty()){
 
                 if(chatList.contains(chatRoom)){

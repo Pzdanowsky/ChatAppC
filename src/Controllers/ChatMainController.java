@@ -5,9 +5,12 @@ import Objects.MessageObject;
 import Objects.User;
 import Repositories.DataSendRepository;
 import Services.PreparationObjectsService;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
@@ -52,6 +55,7 @@ public class ChatMainController {
         ContactBoxManager.getInstance().setVb_contants(vb_contacts);
         ContactBoxManager.getInstance().getRequestContanct();
         ChatBoxManager.getInstance().setVb_messages(vb_message);
+
     }
 
     @FXML
@@ -72,9 +76,7 @@ public class ChatMainController {
        // ChatBoxManager.getInstance().addMsg(msgSend);
     messageField.clear();
 
-
     }
-
 
 
 

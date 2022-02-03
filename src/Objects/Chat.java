@@ -36,7 +36,6 @@ public class Chat implements Serializable, Observable {
     public void addMessage(MessageObject messageObject){
         messageObject.setIdChatRoom(chatID);
         this.messageChatList.add(messageObject);
-
             notifyObserver();
     }
 
